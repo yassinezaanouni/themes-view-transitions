@@ -1,5 +1,6 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import '../styles/transitions.css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -131,43 +132,3 @@
   }
 }
 
-/* Toggle Theme View Transitions */
-@keyframes theme-mask {
-  0% {
-    clip-path: circle(0% at var(--x, 50%) var(--y, 50%));
-  }
-
-  100% {
-    clip-path: circle(150% at var(--x, 50%) var(--y, 50%));
-  }
-}
-
-html.theme-transition::view-transition-old(root),
-html.theme-transition::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
-}
-
-html.theme-transition::view-transition-old(root) {
-  z-index: 1;
-}
-
-html.theme-transition::view-transition-new(root) {
-  z-index: 2;
-  animation: theme-mask 0.5s ease-in forwards;
-}
-
-/* Handle reduced motion preference globally */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  ::before,
-  ::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-  .motion-safe-only {
-    display: none !important;
-  }
-}

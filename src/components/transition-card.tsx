@@ -60,7 +60,10 @@ export function TransitionCard({ transition, index }: TransitionCardProps) {
                     e.stopPropagation();
                   }}
                 >
-                  <ThemeToggle ref={themeToggleRef} />
+                  <ThemeToggle
+                    ref={themeToggleRef}
+                    transitionType={transition.slug as 'theme-toggle' | 'vertical-wipe' | 'diagonal-slide'}
+                  />
                 </div>
               </div>
               <div className="bg-background/80 border-border absolute right-2 bottom-2 rounded-md border px-2 py-1 backdrop-blur-sm">

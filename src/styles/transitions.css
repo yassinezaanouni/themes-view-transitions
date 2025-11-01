@@ -1,0 +1,4 @@
+/* Import all transition styles */
+@import './transitions/theme-toggle.css';
+@import './transitions/vertical-wipe.css';
+@import './transitions/diagonal-slide.css';

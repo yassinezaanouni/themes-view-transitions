@@ -84,7 +84,10 @@ export function TransitionDetail({
           <CardContent className="space-y-4">
             <div className="border-border bg-muted/30 relative flex aspect-video items-center justify-center overflow-hidden rounded-lg border">
               <div className="flex items-center justify-center">
-                <ThemeToggle ref={themeToggleRef} />
+                <ThemeToggle
+                  ref={themeToggleRef}
+                  transitionType={transition.slug as 'theme-toggle' | 'vertical-wipe' | 'diagonal-slide'}
+                />
               </div>
 
               {/* Decorative elements */}

@@ -10,7 +10,11 @@ export interface ThemeToggleRef {
   triggerTransition: () => void;
 }
 
-export const ThemeToggle = forwardRef<ThemeToggleRef>((props, ref) => {
+interface ThemeToggleProps {
+  transitionType?: 'theme-toggle' | 'vertical-wipe' | 'diagonal-slide';
+}
+
+export const ThemeToggle = forwardRef<ThemeToggleRef, ThemeToggleProps>(({ transitionType = 'theme-toggle' }, ref) => {
   const { theme, setTheme } = useTheme();
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -93,12 +97,17 @@ export const ThemeToggle = forwardRef<ThemeToggleRef>((props, ref) => {
       );
     }
 
-    document.documentElement.classList.add('theme-transition');
+    // Map transition type to CSS class
+    const transitionClass = transitionType === 'theme-toggle'
+      ? 'theme-transition'
+      : `${transitionType}-transition`;
+
+    document.documentElement.classList.add(transitionClass);
 
     document.startViewTransition(() => {
       setTheme(newTheme);
       setTimeout(() => {
-        document.documentElement.classList.remove('theme-transition');
+        document.documentElement.classList.remove(transitionClass);
       }, 600);
     });
   };
