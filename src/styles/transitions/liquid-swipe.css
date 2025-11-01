@@ -1,0 +1,33 @@
+/* Liquid Swipe Theme Transition */
+
+html.liquid-swipe-transition::view-transition-group(root) {
+  animation-timing-function: var(--expo-out);
+}
+
+html.liquid-swipe-transition::view-transition-old(root),
+html.liquid-swipe-transition.dark::view-transition-old(root) {
+  animation: none;
+  z-index: -1;
+}
+
+html.liquid-swipe-transition::view-transition-new(root) {
+  animation: liquid-swipe 1s var(--expo-out) forwards;
+}
+
+@keyframes liquid-swipe {
+  0% {
+    clip-path: path('M 0 0 L 0 0 Q 0 50 0 100 L 0 100 Z');
+  }
+  25% {
+    clip-path: path('M 0 0 L 30 0 Q 40 50 30 100 L 0 100 Z');
+  }
+  50% {
+    clip-path: path('M 0 0 L 60 0 Q 80 50 60 100 L 0 100 Z');
+  }
+  75% {
+    clip-path: path('M 0 0 L 90 0 Q 95 50 90 100 L 0 100 Z');
+  }
+  100% {
+    clip-path: path('M 0 0 L 100 0 L 100 100 L 0 100 Z');
+  }
+}

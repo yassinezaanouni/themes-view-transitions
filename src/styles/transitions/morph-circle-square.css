@@ -1,0 +1,42 @@
+/* Morph Circle to Square Theme Transition */
+
+html.morph-circle-square-transition::view-transition-group(root) {
+  animation-timing-function: var(--expo-out);
+}
+
+html.morph-circle-square-transition::view-transition-old(root),
+html.morph-circle-square-transition.dark::view-transition-old(root) {
+  animation: none;
+  z-index: -1;
+}
+
+html.morph-circle-square-transition::view-transition-new(root) {
+  animation: morph-reveal 1.2s var(--expo-out) forwards;
+  filter: blur(0px);
+}
+
+@keyframes morph-reveal {
+  0% {
+    clip-path: circle(0% at 50% 50%);
+    filter: blur(20px);
+    transform: scale(0.8);
+  }
+  40% {
+    clip-path: circle(50% at 50% 50%);
+    filter: blur(5px);
+    transform: scale(1.05);
+  }
+  70% {
+    clip-path: polygon(
+      30% 30%, 70% 30%, 70% 70%, 30% 70%
+    );
+    filter: blur(2px);
+  }
+  100% {
+    clip-path: polygon(
+      0% 0%, 100% 0%, 100% 100%, 0% 100%
+    );
+    filter: blur(0px);
+    transform: scale(1);
+  }
+}

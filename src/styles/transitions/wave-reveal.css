@@ -1,0 +1,27 @@
+/* Wave Reveal Theme Transition */
+
+html.wave-reveal-transition::view-transition-group(root) {
+  animation-timing-function: var(--expo-out);
+}
+
+html.wave-reveal-transition::view-transition-old(root),
+html.wave-reveal-transition.dark::view-transition-old(root) {
+  animation: none;
+  z-index: -1;
+}
+
+html.wave-reveal-transition::view-transition-new(root) {
+  mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,50 Q25,20 50,50 T100,50 L100,100 L0,100 Z" fill="white"/></svg>') left center / 0 100% no-repeat;
+  animation: wave-sweep 1s var(--expo-out) forwards;
+}
+
+@keyframes wave-sweep {
+  0% {
+    mask-position: left center;
+    mask-size: 0 100%;
+  }
+  100% {
+    mask-position: left center;
+    mask-size: 300% 100%;
+  }
+}

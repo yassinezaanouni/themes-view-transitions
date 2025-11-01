@@ -1,13 +1,22 @@
 export type TransitionType =
   | 'theme-toggle'
   | 'vertical-wipe'
-  | 'diagonal-slide'
-  | 'circle'
   | 'circle-with-blur'
   | 'circle-blur-top-left'
   | 'polygon'
   | 'gif-dance'
-  | 'gif-love';
+  | 'gif-love'
+  | 'horizontal-wipe'
+  | 'slide-from-bottom'
+  | 'hexagon-reveal'
+  | 'clock-wipe'
+  | 'blinds'
+  | 'morph-circle-square'
+  | 'liquid-swipe'
+  | 'zoom-blur'
+  | 'pixelate-dissolve'
+  | 'wave-reveal'
+  | 'gradient-wipe';
 
 export interface Transition {
   id: string;
@@ -33,22 +42,6 @@ export const transitions: Transition[] = [
     slug: 'vertical-wipe',
     description: 'Vertical wipe animation for theme transitions',
     cssFile: 'vertical-wipe.css',
-    componentFile: 'theme-toggle.tsx',
-  },
-  {
-    id: '5',
-    title: 'Diagonal Slide Theme',
-    slug: 'diagonal-slide',
-    description: 'Diagonal sliding animation for theme changes',
-    cssFile: 'diagonal-slide.css',
-    componentFile: 'theme-toggle.tsx',
-  },
-  {
-    id: '6',
-    title: 'Circle Theme',
-    slug: 'circle',
-    description: 'Circular mask animation from center',
-    cssFile: 'circle.css',
     componentFile: 'theme-toggle.tsx',
   },
   {
@@ -89,6 +82,94 @@ export const transitions: Transition[] = [
     slug: 'gif-love',
     description: 'Love-themed animated transition',
     cssFile: 'gif-love.css',
+    componentFile: 'theme-toggle.tsx',
+  },
+  {
+    id: '12',
+    title: 'Horizontal Wipe',
+    slug: 'horizontal-wipe',
+    description: 'Smooth horizontal wipe from left to right',
+    cssFile: 'horizontal-wipe.css',
+    componentFile: 'theme-toggle.tsx',
+  },
+  {
+    id: '13',
+    title: 'Slide from Bottom',
+    slug: 'slide-from-bottom',
+    description: 'New page slides up from the bottom',
+    cssFile: 'slide-from-bottom.css',
+    componentFile: 'theme-toggle.tsx',
+  },
+  {
+    id: '15',
+    title: 'Hexagon Reveal',
+    slug: 'hexagon-reveal',
+    description: 'Hexagonal shape expanding from center',
+    cssFile: 'hexagon-reveal.css',
+    componentFile: 'theme-toggle.tsx',
+  },
+  {
+    id: '16',
+    title: 'Clock Wipe',
+    slug: 'clock-wipe',
+    description: 'Clock hand sweeping reveal animation',
+    cssFile: 'clock-wipe.css',
+    componentFile: 'theme-toggle.tsx',
+  },
+  {
+    id: '17',
+    title: 'Blinds Effect',
+    slug: 'blinds',
+    description: 'Venetian blinds opening transition',
+    cssFile: 'blinds.css',
+    componentFile: 'theme-toggle.tsx',
+  },
+  {
+    id: '18',
+    title: 'Morph Circle to Square',
+    slug: 'morph-circle-square',
+    description: 'Smooth morphing from circle to square with blur',
+    cssFile: 'morph-circle-square.css',
+    componentFile: 'theme-toggle.tsx',
+  },
+  {
+    id: '19',
+    title: 'Liquid Swipe',
+    slug: 'liquid-swipe',
+    description: 'Fluid organic wave reveal animation',
+    cssFile: 'liquid-swipe.css',
+    componentFile: 'theme-toggle.tsx',
+  },
+  {
+    id: '20',
+    title: 'Zoom Blur',
+    slug: 'zoom-blur',
+    description: 'Radial zoom with depth blur effect',
+    cssFile: 'zoom-blur.css',
+    componentFile: 'theme-toggle.tsx',
+  },
+  {
+    id: '22',
+    title: 'Pixelate Dissolve',
+    slug: 'pixelate-dissolve',
+    description: 'Modern pixelation crossfade effect',
+    cssFile: 'pixelate-dissolve.css',
+    componentFile: 'theme-toggle.tsx',
+  },
+  {
+    id: '23',
+    title: 'Wave Reveal',
+    slug: 'wave-reveal',
+    description: 'Organic wave sweeping across screen',
+    cssFile: 'wave-reveal.css',
+    componentFile: 'theme-toggle.tsx',
+  },
+  {
+    id: '27',
+    title: 'Gradient Wipe',
+    slug: 'gradient-wipe',
+    description: 'Smooth gradient-based sweep transition',
+    cssFile: 'gradient-wipe.css',
     componentFile: 'theme-toggle.tsx',
   },
 ];

@@ -1,0 +1,25 @@
+/* Horizontal Wipe Theme Transition */
+
+html.horizontal-wipe-transition::view-transition-old(root),
+html.horizontal-wipe-transition::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+html.horizontal-wipe-transition::view-transition-old(root) {
+  z-index: 1;
+}
+
+html.horizontal-wipe-transition::view-transition-new(root) {
+  z-index: 2;
+  animation: horizontal-wipe 0.6s ease-in-out forwards;
+}
+
+@keyframes horizontal-wipe {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}

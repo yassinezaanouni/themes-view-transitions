@@ -1,0 +1,47 @@
+/* Pixelate Dissolve Theme Transition */
+
+html.pixelate-dissolve-transition::view-transition-group(root) {
+  animation-timing-function: var(--expo-out);
+}
+
+html.pixelate-dissolve-transition::view-transition-old(root),
+html.pixelate-dissolve-transition.dark::view-transition-old(root) {
+  animation: pixelate-out 0.6s steps(10) forwards;
+  z-index: 2;
+}
+
+html.pixelate-dissolve-transition::view-transition-new(root) {
+  animation: pixelate-in 0.6s steps(10) forwards;
+  animation-delay: 0.3s;
+  z-index: 1;
+}
+
+@keyframes pixelate-out {
+  0% {
+    filter: blur(0px);
+    opacity: 1;
+  }
+  50% {
+    filter: blur(10px);
+    opacity: 0.5;
+  }
+  100% {
+    filter: blur(20px);
+    opacity: 0;
+  }
+}
+
+@keyframes pixelate-in {
+  0% {
+    filter: blur(20px);
+    opacity: 0;
+  }
+  50% {
+    filter: blur(10px);
+    opacity: 0.5;
+  }
+  100% {
+    filter: blur(0px);
+    opacity: 1;
+  }
+}

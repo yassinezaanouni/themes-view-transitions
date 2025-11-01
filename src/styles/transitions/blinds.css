@@ -1,0 +1,31 @@
+/* Blinds Theme Transition */
+
+html.blinds-transition::view-transition-group(root) {
+  animation-timing-function: var(--expo-out);
+}
+
+html.blinds-transition::view-transition-old(root),
+html.blinds-transition.dark::view-transition-old(root) {
+  animation: none;
+  animation-fill-mode: both;
+  z-index: -1;
+}
+
+html.blinds-transition::view-transition-new(root) {
+  mask-image: repeating-linear-gradient(
+    to bottom,
+    black 0%,
+    black 5%,
+    transparent 5%,
+    transparent 10%
+  );
+  mask-size: 100% 0%;
+  mask-position: 0 0;
+  animation: blinds-open 0.8s ease-out forwards;
+}
+
+@keyframes blinds-open {
+  to {
+    mask-size: 100% 200%;
+  }
+}

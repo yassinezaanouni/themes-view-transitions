@@ -1,0 +1,23 @@
+/* Hexagon Reveal Theme Transition */
+
+html.hexagon-reveal-transition::view-transition-group(root) {
+  animation-timing-function: var(--expo-out);
+}
+
+html.hexagon-reveal-transition::view-transition-old(root),
+html.hexagon-reveal-transition.dark::view-transition-old(root) {
+  animation: none;
+  animation-fill-mode: both;
+  z-index: -1;
+}
+
+html.hexagon-reveal-transition::view-transition-new(root) {
+  mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="50,5 90,25 90,75 50,95 10,75 10,25" fill="white"/></svg>') center / 0 no-repeat;
+  animation: hexagon-scale 0.8s ease-out forwards;
+}
+
+@keyframes hexagon-scale {
+  to {
+    mask-size: 250vmax;
+  }
+}

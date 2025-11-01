@@ -1,0 +1,39 @@
+/* Zoom Blur Theme Transition */
+
+html.zoom-blur-transition::view-transition-group(root) {
+  animation-timing-function: var(--expo-out);
+}
+
+html.zoom-blur-transition::view-transition-old(root) {
+  animation: zoom-out-blur 0.8s var(--expo-out) forwards;
+}
+
+html.zoom-blur-transition::view-transition-new(root) {
+  animation: zoom-in-blur 0.8s var(--expo-out) forwards;
+}
+
+@keyframes zoom-out-blur {
+  from {
+    transform: scale(1);
+    filter: blur(0px);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.5);
+    filter: blur(30px);
+    opacity: 0;
+  }
+}
+
+@keyframes zoom-in-blur {
+  from {
+    transform: scale(0.7);
+    filter: blur(30px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    filter: blur(0px);
+    opacity: 1;
+  }
+}

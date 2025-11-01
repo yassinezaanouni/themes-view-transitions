@@ -1,10 +1,19 @@
 /* Import all transition styles */
 @import './transitions/theme-toggle.css';
 @import './transitions/vertical-wipe.css';
-@import './transitions/diagonal-slide.css';
-@import './transitions/circle.css';
 @import './transitions/circle-with-blur.css';
 @import './transitions/circle-blur-top-left.css';
 @import './transitions/polygon.css';
 @import './transitions/gif-dance.css';
 @import './transitions/gif-love.css';
+@import './transitions/horizontal-wipe.css';
+@import './transitions/slide-from-bottom.css';
+@import './transitions/hexagon-reveal.css';
+@import './transitions/clock-wipe.css';
+@import './transitions/blinds.css';
+@import './transitions/morph-circle-square.css';
+@import './transitions/liquid-swipe.css';
+@import './transitions/zoom-blur.css';
+@import './transitions/pixelate-dissolve.css';
+@import './transitions/wave-reveal.css';
+@import './transitions/gradient-wipe.css';
