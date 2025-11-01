@@ -131,17 +131,7 @@ export const transitions: Transition[] = [
     featured: false,
     complexity: 'simple',
   },
-  {
-    title: 'Love GIF Theme',
-    slug: 'gif-love',
-    description: 'Love-themed animated transition',
-    cssFile: 'gif-love.css',
-    componentFile: 'theme-toggle.tsx',
-    category: 'fun',
-    tags: ['Playful', 'Romantic', 'Fun'],
-    featured: false,
-    complexity: 'simple',
-  },
+
   {
     title: 'Heart GIF Theme',
     slug: 'gif-heart',
@@ -351,7 +341,17 @@ export const transitions: Transition[] = [
     featured: false,
     complexity: 'advanced',
   },
-
+  {
+    title: 'Love GIF Theme',
+    slug: 'gif-love',
+    description: 'Love-themed animated transition',
+    cssFile: 'gif-love.css',
+    componentFile: 'theme-toggle.tsx',
+    category: 'fun',
+    tags: ['Playful', 'Romantic', 'Fun'],
+    featured: false,
+    complexity: 'simple',
+  },
   {
     title: 'Spiral Wipe',
     slug: 'spiral-wipe',
