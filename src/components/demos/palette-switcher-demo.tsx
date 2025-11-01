@@ -24,9 +24,7 @@ export function PaletteSwitcherDemo() {
   const swap = () => {
     const action = () => setMode((value) => (value === "aurora" ? "ember" : "aurora"));
     if (typeof document.startViewTransition === "function") {
-      document.documentElement.classList.add("page-transition");
-      const vt = document.startViewTransition(action);
-      vt.finished.finally(() => document.documentElement.classList.remove("page-transition"));
+      document.startViewTransition(action);
       return;
     }
     action();

@@ -36,7 +36,6 @@ export function ThemeToggleDemo() {
         return;
       }
 
-      doc.classList.remove("page-transition");
       doc.classList.add("theme-transition");
 
       const transition = document.startViewTransition(() => {

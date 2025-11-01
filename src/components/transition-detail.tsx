@@ -2,6 +2,7 @@
 
 import { ArrowLeft, Play } from 'lucide-react';
 import { motion as m } from 'motion/react';
+import Link from 'next/link';
 import { useState } from 'react';
 
 import { CodeBlock } from '@/components/code-block';
@@ -9,7 +10,6 @@ import { ThemeToggle } from '@/components/theme-toggle';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ViewTransitionLink } from '@/components/view-transition-link';
 import { Transition } from '@/data/transitions';
 
 interface TransitionDetailProps {
@@ -27,12 +27,12 @@ export function TransitionDetail({ transition }: TransitionDetailProps) {
   return (
     <div className="space-y-8">
       {/* Back Button */}
-      <ViewTransitionLink href="/">
+      <Link href="/">
         <Button variant="ghost" className="gap-2">
           <ArrowLeft className="h-4 w-4" />
           Back to all transitions
         </Button>
-      </ViewTransitionLink>
+      </Link>
 
       {/* Header */}
       <div className="space-y-2">

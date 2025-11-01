@@ -80,7 +80,6 @@ export function ThemeToggle() {
         );
       }
 
-      document.documentElement.classList.remove('page-transition');
       document.documentElement.classList.add('theme-transition');
 
       (document as Document & { startViewTransition: (callback: () => void) => void }).startViewTransition(() => {

@@ -2,6 +2,7 @@
 
 import { ArrowRight } from "lucide-react";
 import { motion as m } from "motion/react";
+import Link from "next/link";
 
 import {
   Card,
@@ -10,7 +11,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ViewTransitionLink } from "@/components/view-transition-link";
 import { Transition } from "@/data/transitions";
 
 interface TransitionCardProps {
@@ -20,7 +20,7 @@ interface TransitionCardProps {
 
 export function TransitionCard({ transition, index }: TransitionCardProps) {
   return (
-    <ViewTransitionLink href={`/transition/${transition.slug}`}>
+    <Link href={`/transition/${transition.slug}`}>
       <m.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -95,6 +95,6 @@ export function TransitionCard({ transition, index }: TransitionCardProps) {
           </CardContent>
         </Card>
       </m.div>
-    </ViewTransitionLink>
+    </Link>
   );
 }

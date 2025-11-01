@@ -18,9 +18,7 @@ export function DashboardLiftDemo() {
   const toggle = () => {
     const apply = () => setLifted((state) => !state);
     if (typeof document.startViewTransition === "function") {
-      document.documentElement.classList.add("page-transition");
-      const vt = document.startViewTransition(apply);
-      vt.finished.finally(() => document.documentElement.classList.remove("page-transition"));
+      document.startViewTransition(apply);
       return;
     }
     apply();

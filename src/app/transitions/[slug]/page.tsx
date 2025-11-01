@@ -1,14 +1,13 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { CodeBlock } from "@/components/code/code-block";
+import { CodeTabs } from "@/components/code-tabs";
 import {
   transitionDemos,
   type TransitionSlug,
 } from "@/components/transition-registry";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ViewTransitionLink } from "@/components/view-transition-link";
 import { getTransitionBySlug, transitions } from "@/data/transitions";
 
 interface TransitionPageProps {
@@ -55,12 +54,12 @@ export default async function TransitionPage({ params }: TransitionPageProps) {
       />
       <div className="relative z-[1] mx-auto flex w-full max-w-6xl flex-col gap-14 px-6 pb-24 pt-16 sm:px-10 lg:px-16">
         <div className="flex flex-col gap-8">
-          <ViewTransitionLink
+          <Link
             href="/"
             className="inline-flex w-fit items-center gap-3 rounded-full border border-border/60 bg-[color-mix(in_oklch,var(--color-card)_94%,transparent)] px-5 py-2 text-xs uppercase tracking-[0.24em] text-[color-mix(in_oklch,var(--color-muted-foreground)_70%,transparent)] shadow-[0px_18px_42px_-36px_color-mix(in_oklch,var(--color-ring)_35%,transparent)] transition-transform duration-300 hover:-translate-y-0.5"
           >
             ← Back to all transitions
-          </ViewTransitionLink>
+          </Link>
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl space-y-5">
               <Badge variant="solid" className="uppercase tracking-[0.28em]">
@@ -112,34 +111,17 @@ export default async function TransitionPage({ params }: TransitionPageProps) {
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-[color-mix(in_oklch,var(--color-muted-foreground)_80%,transparent)]">
                 Use view-transition-name on the surfaces that should keep their
-                identity across frames. For theme transitions, clear the
-                page-transition class to avoid animation conflicts and always
-                honour reduced motion preferences by short-circuiting to simple
-                state updates.
+                identity across frames. For theme transitions, batch DOM updates
+                inside document.startViewTransition and always honour reduced
+                motion preferences by short-circuiting to simple state updates.
               </p>
             </div>
           </div>
           <aside className="flex flex-col gap-6">
-            <Tabs defaultValue="global">
-              <TabsList className="w-full justify-between">
-                <TabsTrigger value="global">global.css</TabsTrigger>
-                <TabsTrigger value="component">component.tsx</TabsTrigger>
-              </TabsList>
-              <TabsContent value="global">
-                <CodeBlock
-                  code={transition.globalCss}
-                  language="css"
-                  filename="global.css"
-                />
-              </TabsContent>
-              <TabsContent value="component">
-                <CodeBlock
-                  code={transition.componentCode}
-                  language="tsx"
-                  filename="component.tsx"
-                />
-              </TabsContent>
-            </Tabs>
+            <CodeTabs
+              globalCss={transition.globalCss}
+              componentCode={transition.componentCode}
+            />
             <div className="rounded-[calc(var(--radius-xl))] border border-border/60 bg-[color-mix(in_oklch,var(--color-card)_94%,transparent)] p-6 text-sm text-[color-mix(in_oklch,var(--color-muted-foreground)_78%,transparent)] shadow-[0px_24px_60px_-48px_color-mix(in_oklch,var(--color-ring)_35%,transparent)]">
               <h3 className="text-base font-semibold text-card-foreground">
                 Replay tips

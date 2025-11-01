@@ -137,7 +137,6 @@ export function ThemeToggle() {
         );
       }
 
-      document.documentElement.classList.remove('page-transition');
       document.documentElement.classList.add('theme-transition');
 
       document.startViewTransition(() => {
@@ -229,78 +228,6 @@ export function ThemeToggle() {
 }`,
   },
   {
-    id: '2',
-    title: 'Fade & Slide Navigation',
-    slug: 'fade-slide',
-    description: 'Smooth fade and slide effect for page navigation',
-    category: 'Navigation',
-    globalCss: `/* Page Transitions */
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-}
-
-@keyframes fade-out {
-  to {
-    opacity: 0;
-  }
-}
-
-@keyframes slide-from-right {
-  from {
-    transform: translateX(30px);
-  }
-}
-
-@keyframes slide-to-left {
-  to {
-    transform: translateX(-30px);
-  }
-}
-
-html.page-transition::view-transition-old(root) {
-  animation: 90ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
-    300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
-}
-
-html.page-transition::view-transition-new(root) {
-  animation: 210ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
-    300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
-}`,
-    componentCode: `'use client';
-
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-
-export function NavigationLink({ href, children }: { href: string; children: React.ReactNode }) {
-  const router = useRouter();
-
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-
-    if (typeof document !== 'undefined' && 'startViewTransition' in document) {
-      document.documentElement.classList.add('page-transition');
-
-      (document as any).startViewTransition(() => {
-        router.push(href);
-        setTimeout(() => {
-          document.documentElement.classList.remove('page-transition');
-        }, 600);
-      });
-    } else {
-      router.push(href);
-    }
-  };
-
-  return (
-    <Link href={href} onClick={handleClick}>
-      {children}
-    </Link>
-  );
-}`,
-  },
-  {
     id: '3',
     title: 'Vertical Wipe Theme',
     slug: 'vertical-wipe',
@@ -366,66 +293,6 @@ export function VerticalWipeToggle() {
 }`,
   },
   {
-    id: '4',
-    title: 'Scale & Fade',
-    slug: 'scale-fade',
-    description: 'Scale and fade effect for smooth page transitions',
-    category: 'Navigation',
-    globalCss: `/* Scale & Fade Transition */
-@keyframes scale-fade-in {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-}
-
-@keyframes scale-fade-out {
-  to {
-    opacity: 0;
-    transform: scale(1.05);
-  }
-}
-
-html.scale-fade-transition::view-transition-old(root) {
-  animation: 300ms cubic-bezier(0.4, 0, 1, 1) both scale-fade-out;
-}
-
-html.scale-fade-transition::view-transition-new(root) {
-  animation: 300ms cubic-bezier(0, 0, 0.2, 1) both scale-fade-in;
-}`,
-    componentCode: `'use client';
-
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-
-export function ScaleFadeLink({ href, children }: { href: string; children: React.ReactNode }) {
-  const router = useRouter();
-
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-
-    if (typeof document !== 'undefined' && 'startViewTransition' in document) {
-      document.documentElement.classList.add('scale-fade-transition');
-
-      (document as any).startViewTransition(() => {
-        router.push(href);
-        setTimeout(() => {
-          document.documentElement.classList.remove('scale-fade-transition');
-        }, 600);
-      });
-    } else {
-      router.push(href);
-    }
-  };
-
-  return (
-    <Link href={href} onClick={handleClick}>
-      {children}
-    </Link>
-  );
-}`,
-  },
-  {
     id: '5',
     title: 'Diagonal Slide Theme',
     slug: 'diagonal-slide',
@@ -482,66 +349,6 @@ export function DiagonalSlideToggle() {
     <Button onClick={toggleTheme} variant="outline">
       Toggle Theme
     </Button>
-  );
-}`,
-  },
-  {
-    id: '6',
-    title: 'Rotate & Zoom',
-    slug: 'rotate-zoom',
-    description: 'Rotating zoom effect for dramatic page transitions',
-    category: 'Navigation',
-    globalCss: `/* Rotate & Zoom Transition */
-@keyframes rotate-zoom-in {
-  from {
-    opacity: 0;
-    transform: scale(0.8) rotate(-5deg);
-  }
-}
-
-@keyframes rotate-zoom-out {
-  to {
-    opacity: 0;
-    transform: scale(1.2) rotate(5deg);
-  }
-}
-
-html.rotate-zoom-transition::view-transition-old(root) {
-  animation: 400ms cubic-bezier(0.4, 0, 1, 1) both rotate-zoom-out;
-}
-
-html.rotate-zoom-transition::view-transition-new(root) {
-  animation: 400ms cubic-bezier(0, 0, 0.2, 1) both rotate-zoom-in;
-}`,
-    componentCode: `'use client';
-
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-
-export function RotateZoomLink({ href, children }: { href: string; children: React.ReactNode }) {
-  const router = useRouter();
-
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-
-    if (typeof document !== 'undefined' && 'startViewTransition' in document) {
-      document.documentElement.classList.add('rotate-zoom-transition');
-
-      (document as any).startViewTransition(() => {
-        router.push(href);
-        setTimeout(() => {
-          document.documentElement.classList.remove('rotate-zoom-transition');
-        }, 800);
-      });
-    } else {
-      router.push(href);
-    }
-  };
-
-  return (
-    <Link href={href} onClick={handleClick}>
-      {children}
-    </Link>
   );
 }`,
   },

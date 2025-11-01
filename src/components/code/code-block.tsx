@@ -2,9 +2,9 @@
 
 import type { Language, PrismTheme } from "prism-react-renderer";
 import { Highlight } from "prism-react-renderer";
-import { useCallback, useMemo, useState } from "react";
+import { useMemo } from "react";
 
-import { Button } from "@/components/ui/button";
+import { CopyButton } from "@/components/ui/copy-button";
 import { cn } from "@/lib/utils";
 
 const semanticTheme: PrismTheme = {
@@ -72,18 +72,6 @@ export interface CodeBlockProps {
 }
 
 export function CodeBlock({ code, language = "tsx", className, filename }: CodeBlockProps) {
-  const [copied, setCopied] = useState(false);
-
-  const onCopy = useCallback(async () => {
-    try {
-      await navigator.clipboard.writeText(code.trim());
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1600);
-    } catch (error) {
-      console.error("Unable to copy snippet", error);
-    }
-  }, [code]);
-
   const snippet = useMemo(() => code.trim(), [code]);
 
   return (
@@ -97,15 +85,10 @@ export function CodeBlock({ code, language = "tsx", className, filename }: CodeB
         <span className="font-semibold text-[color-mix(in_oklch,var(--color-muted-foreground)_95%,transparent)]">
           {filename ?? "snippet"}
         </span>
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          onClick={onCopy}
-          className="h-8 gap-2 rounded-full px-3 text-[11px] text-[color-mix(in_oklch,var(--color-muted-foreground)_92%,transparent)] hover:bg-[color-mix(in_oklch,var(--color-muted)_94%,transparent)]"
-        >
-          {copied ? "Copied" : "Copy"}
-        </Button>
+        <CopyButton
+          text={snippet}
+          className="h-8 rounded-full text-[color-mix(in_oklch,var(--color-muted-foreground)_92%,transparent)] hover:bg-[color-mix(in_oklch,var(--color-muted)_94%,transparent)]"
+        />
       </div>
       <div className="relative overflow-auto">
         <Highlight code={snippet} language={language} theme={semanticTheme}>
