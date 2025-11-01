@@ -5,14 +5,15 @@ html.gif-loveyou-transition::view-transition-group(root) {
 }
 
 html.gif-loveyou-transition::view-transition-new(root) {
-  mask: url('https://media.tenor.com/6nVoqd_f-OQAAAAi/love-you-i-love-you.gif') center / 0 no-repeat;
-  animation: gif-scale 3s;
+  mask: url('https://media.tenor.com/6nVoqd_f-OQAAAAi/love-you-i-love-you.gif')
+    center / 0 no-repeat;
+  animation: gif-scale 1.5s;
   animation-fill-mode: both;
 }
 
 html.gif-loveyou-transition::view-transition-old(root),
 html.gif-loveyou-transition.dark::view-transition-old(root) {
-  animation: gif-scale 3s;
+  animation: gif-scale 1.5s;
   animation-fill-mode: both;
 }
 
@@ -20,10 +21,7 @@ html.gif-loveyou-transition.dark::view-transition-old(root) {
   0% {
     mask-size: 0;
   }
-  10% {
-    mask-size: 50vmax;
-  }
-  90% {
+  50% {
     mask-size: 50vmax;
   }
   100% {

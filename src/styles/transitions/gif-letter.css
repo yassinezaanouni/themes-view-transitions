@@ -5,14 +5,15 @@ html.gif-letter-transition::view-transition-group(root) {
 }
 
 html.gif-letter-transition::view-transition-new(root) {
-  mask: url('https://media.tenor.com/_yahzst_G6UAAAAi/love-letter-letter.gif') center / 0 no-repeat;
-  animation: gif-scale 3s;
+  mask: url('https://media.tenor.com/_yahzst_G6UAAAAi/love-letter-letter.gif')
+    center / 0 no-repeat;
+  animation: gif-scale 1.25s;
   animation-fill-mode: both;
 }
 
 html.gif-letter-transition::view-transition-old(root),
 html.gif-letter-transition.dark::view-transition-old(root) {
-  animation: gif-scale 3s;
+  animation: gif-scale 1.25s;
   animation-fill-mode: both;
 }
 

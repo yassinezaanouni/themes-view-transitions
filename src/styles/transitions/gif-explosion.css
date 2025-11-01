@@ -5,14 +5,15 @@ html.gif-explosion-transition::view-transition-group(root) {
 }
 
 html.gif-explosion-transition::view-transition-new(root) {
-  mask: url('https://media.tenor.com/5acZjLl1OTAAAAAi/explosion-deltarune.gif') center / 0 no-repeat;
-  animation: gif-scale 3s;
+  mask: url('https://media.tenor.com/5acZjLl1OTAAAAAi/explosion-deltarune.gif')
+    center / 0 no-repeat;
+  animation: gif-scale 1.25s;
   animation-fill-mode: both;
 }
 
 html.gif-explosion-transition::view-transition-old(root),
 html.gif-explosion-transition.dark::view-transition-old(root) {
-  animation: gif-scale 3s;
+  animation: gif-scale 1.25s;
   animation-fill-mode: both;
 }
 
