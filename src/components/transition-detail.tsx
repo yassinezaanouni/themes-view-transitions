@@ -127,12 +127,16 @@ export function TransitionDetail({
 
             <div className="bg-muted/50 space-y-2 rounded-lg p-4">
               <p className="text-sm font-medium">How it works:</p>
-              <p className="text-muted-foreground text-sm">
-                Click the theme toggle button to see the circular reveal
-                animation in action. The transition uses the View Transition API
-                to create a smooth, animated theme switch that originates from
-                the button&apos;s position.
-              </p>
+              <ul className="text-muted-foreground list-inside list-disc space-y-1 text-sm">
+                <li>
+                  Click the theme toggle button to see the{' '}
+                  {transition.title + ' '} animation in action.
+                </li>
+                <li>
+                  The transition uses the View Transition API to create a
+                  smooth, animated theme switch.
+                </li>
+              </ul>
             </div>
           </CardContent>
         </Card>
