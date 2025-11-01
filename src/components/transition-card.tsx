@@ -1,9 +1,10 @@
 'use client';
 
-import { ArrowRight, Play } from 'lucide-react';
+import { ArrowRight, Play, Star } from 'lucide-react';
 import Link from 'next/link';
 import { useRef } from 'react';
 
+import { Badge } from '@/components/ui/badge';
 import { ThemeToggle, ThemeToggleRef } from '@/components/theme-toggle';
 import { Button } from '@/components/ui/button';
 import {
@@ -37,12 +38,23 @@ export function TransitionCard({ transition, index }: TransitionCardProps) {
           <CardHeader>
             <div className="flex items-start justify-between">
               <div className="space-y-1">
-                <CardTitle className="group-hover:text-primary text-xl transition-colors">
-                  {transition.title}
-                </CardTitle>
+                <div className="flex items-center gap-2">
+                  <CardTitle className="group-hover:text-primary text-xl transition-colors">
+                    {transition.title}
+                  </CardTitle>
+                  {transition.featured && (
+                    <Badge
+                      variant="secondary"
+                      className="gap-1 bg-gradient-to-r from-amber-500/10 to-orange-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/30"
+                    >
+                      <Star className="h-3 w-3 fill-current" />
+                      Featured
+                    </Badge>
+                  )}
+                </div>
                 <CardDescription>{transition.description}</CardDescription>
               </div>
-              <ArrowRight className="text-muted-foreground group-hover:text-primary h-5 w-5 transition-all group-hover:translate-x-1" />
+              <ArrowRight className="text-muted-foreground group-hover:text-primary h-5 w-5 shrink-0 transition-all group-hover:translate-x-1" />
             </div>
           </CardHeader>
 

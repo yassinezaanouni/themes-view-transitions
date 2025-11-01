@@ -12,6 +12,7 @@ export type TransitionType =
   | 'gif-mad'
   | 'gif-punch'
   | 'gif-explosion'
+  | 'gif-checkmark'
   | 'horizontal-wipe'
   | 'slide-from-bottom'
   | 'hexagon-reveal'
@@ -30,6 +31,16 @@ export type TransitionType =
   | 'iris-reveal'
   | 'skew-slide';
 
+export type CategoryType =
+  | 'featured'
+  | 'geometric'
+  | 'wipes'
+  | '3d'
+  | 'organic'
+  | 'fun';
+
+export type ComplexityLevel = 'simple' | 'intermediate' | 'advanced';
+
 export interface Transition {
   id: string;
   title: string;
@@ -37,6 +48,10 @@ export interface Transition {
   description: string;
   cssFile: string; // Path to CSS file relative to src/styles/transitions/
   componentFile: string; // Path to component file relative to src/components/
+  category: CategoryType;
+  tags: string[];
+  featured: boolean;
+  complexity: ComplexityLevel;
 }
 
 export const transitions: Transition[] = [
@@ -47,6 +62,10 @@ export const transitions: Transition[] = [
     description: 'Circular reveal animation for theme switching',
     cssFile: 'circular-reveal.css',
     componentFile: 'theme-toggle.tsx',
+    category: 'geometric',
+    tags: ['Professional', 'Clean', 'Modern'],
+    featured: true,
+    complexity: 'simple',
   },
   {
     id: '3',
@@ -55,6 +74,10 @@ export const transitions: Transition[] = [
     description: 'Vertical wipe animation for theme transitions',
     cssFile: 'vertical-wipe.css',
     componentFile: 'theme-toggle.tsx',
+    category: 'wipes',
+    tags: ['Professional', 'Minimal', 'Smooth'],
+    featured: true,
+    complexity: 'simple',
   },
   {
     id: '7',
@@ -63,6 +86,10 @@ export const transitions: Transition[] = [
     description: 'Circular mask with blur effect',
     cssFile: 'circle-with-blur.css',
     componentFile: 'theme-toggle.tsx',
+    category: 'geometric',
+    tags: ['Modern', 'Smooth', 'Creative'],
+    featured: false,
+    complexity: 'intermediate',
   },
   {
     id: '8',
@@ -71,6 +98,10 @@ export const transitions: Transition[] = [
     description: 'Circular blur expanding from top left corner',
     cssFile: 'circle-blur-top-left.css',
     componentFile: 'theme-toggle.tsx',
+    category: 'geometric',
+    tags: ['Creative', 'Dynamic', 'Modern'],
+    featured: false,
+    complexity: 'intermediate',
   },
   {
     id: '9',
@@ -79,6 +110,10 @@ export const transitions: Transition[] = [
     description: 'Geometric polygon reveal animation',
     cssFile: 'polygon.css',
     componentFile: 'theme-toggle.tsx',
+    category: 'geometric',
+    tags: ['Bold', 'Angular', 'Modern'],
+    featured: false,
+    complexity: 'intermediate',
   },
   {
     id: '10',
@@ -87,6 +122,10 @@ export const transitions: Transition[] = [
     description: 'Fun dancing character transition effect',
     cssFile: 'gif-dance.css',
     componentFile: 'theme-toggle.tsx',
+    category: 'fun',
+    tags: ['Playful', 'Fun', 'Unique'],
+    featured: true,
+    complexity: 'simple',
   },
   {
     id: '11',
@@ -95,6 +134,10 @@ export const transitions: Transition[] = [
     description: 'Love-themed animated transition',
     cssFile: 'gif-love.css',
     componentFile: 'theme-toggle.tsx',
+    category: 'fun',
+    tags: ['Playful', 'Romantic', 'Fun'],
+    featured: false,
+    complexity: 'simple',
   },
   {
     id: '11a',
@@ -103,6 +146,10 @@ export const transitions: Transition[] = [
     description: 'Heart love animated transition',
     cssFile: 'gif-heart.css',
     componentFile: 'theme-toggle.tsx',
+    category: 'fun',
+    tags: ['Playful', 'Romantic', 'Fun'],
+    featured: false,
+    complexity: 'simple',
   },
   {
     id: '11b',
@@ -111,6 +158,10 @@ export const transitions: Transition[] = [
     description: 'Love letter animated transition',
     cssFile: 'gif-letter.css',
     componentFile: 'theme-toggle.tsx',
+    category: 'fun',
+    tags: ['Playful', 'Romantic', 'Fun'],
+    featured: false,
+    complexity: 'simple',
   },
   {
     id: '11c',
@@ -119,6 +170,10 @@ export const transitions: Transition[] = [
     description: 'Love you animated transition',
     cssFile: 'gif-loveyou.css',
     componentFile: 'theme-toggle.tsx',
+    category: 'fun',
+    tags: ['Playful', 'Romantic', 'Fun'],
+    featured: false,
+    complexity: 'simple',
   },
   {
     id: '11d',
@@ -127,6 +182,10 @@ export const transitions: Transition[] = [
     description: 'Mad animated transition',
     cssFile: 'gif-mad.css',
     componentFile: 'theme-toggle.tsx',
+    category: 'fun',
+    tags: ['Playful', 'Expressive', 'Fun'],
+    featured: false,
+    complexity: 'simple',
   },
   {
     id: '11e',
@@ -135,6 +194,10 @@ export const transitions: Transition[] = [
     description: 'Punch animated transition',
     cssFile: 'gif-punch.css',
     componentFile: 'theme-toggle.tsx',
+    category: 'fun',
+    tags: ['Playful', 'Dynamic', 'Fun'],
+    featured: false,
+    complexity: 'simple',
   },
   {
     id: '11f',
@@ -143,6 +206,22 @@ export const transitions: Transition[] = [
     description: 'Explosion animated transition',
     cssFile: 'gif-explosion.css',
     componentFile: 'theme-toggle.tsx',
+    category: 'fun',
+    tags: ['Playful', 'Dramatic', 'Fun'],
+    featured: false,
+    complexity: 'simple',
+  },
+  {
+    id: '11g',
+    title: 'Checkmark GIF Theme',
+    slug: 'gif-checkmark',
+    description: 'Checkmark success animated transition',
+    cssFile: 'gif-checkmark.css',
+    componentFile: 'theme-toggle.tsx',
+    category: 'fun',
+    tags: ['Playful', 'Success', 'Fun'],
+    featured: false,
+    complexity: 'simple',
   },
   {
     id: '12',
@@ -151,6 +230,10 @@ export const transitions: Transition[] = [
     description: 'Smooth horizontal wipe from left to right',
     cssFile: 'horizontal-wipe.css',
     componentFile: 'theme-toggle.tsx',
+    category: 'wipes',
+    tags: ['Professional', 'Minimal', 'Smooth'],
+    featured: false,
+    complexity: 'simple',
   },
   {
     id: '13',
@@ -159,6 +242,10 @@ export const transitions: Transition[] = [
     description: 'New page slides up from the bottom',
     cssFile: 'slide-from-bottom.css',
     componentFile: 'theme-toggle.tsx',
+    category: 'fun',
+    tags: ['Playful', 'Simple', 'Dynamic'],
+    featured: false,
+    complexity: 'simple',
   },
   {
     id: '15',
@@ -167,6 +254,10 @@ export const transitions: Transition[] = [
     description: 'Hexagonal shape expanding from center',
     cssFile: 'hexagon-reveal.css',
     componentFile: 'theme-toggle.tsx',
+    category: 'geometric',
+    tags: ['Bold', 'Angular', 'Modern'],
+    featured: false,
+    complexity: 'intermediate',
   },
   {
     id: '16',
@@ -175,6 +266,10 @@ export const transitions: Transition[] = [
     description: 'Clock hand sweeping reveal animation',
     cssFile: 'clock-wipe.css',
     componentFile: 'theme-toggle.tsx',
+    category: 'wipes',
+    tags: ['Creative', 'Unique', 'Smooth'],
+    featured: true,
+    complexity: 'intermediate',
   },
   {
     id: '17',
@@ -183,6 +278,10 @@ export const transitions: Transition[] = [
     description: 'Venetian blinds opening transition',
     cssFile: 'blinds.css',
     componentFile: 'theme-toggle.tsx',
+    category: 'wipes',
+    tags: ['Classic', 'Structured', 'Professional'],
+    featured: false,
+    complexity: 'intermediate',
   },
   {
     id: '18',
@@ -191,6 +290,10 @@ export const transitions: Transition[] = [
     description: 'Smooth morphing from circle to square with blur',
     cssFile: 'morph-circle-square.css',
     componentFile: 'theme-toggle.tsx',
+    category: 'geometric',
+    tags: ['Creative', 'Smooth', 'Dynamic'],
+    featured: false,
+    complexity: 'advanced',
   },
   {
     id: '19',
@@ -199,6 +302,10 @@ export const transitions: Transition[] = [
     description: 'Fluid organic wave reveal animation',
     cssFile: 'liquid-swipe.css',
     componentFile: 'theme-toggle.tsx',
+    category: 'organic',
+    tags: ['Creative', 'Smooth', 'Modern'],
+    featured: false,
+    complexity: 'advanced',
   },
   {
     id: '20',
@@ -207,6 +314,10 @@ export const transitions: Transition[] = [
     description: 'Radial zoom with depth blur effect',
     cssFile: 'zoom-blur.css',
     componentFile: 'theme-toggle.tsx',
+    category: 'organic',
+    tags: ['Dynamic', 'Cinematic', 'Bold'],
+    featured: false,
+    complexity: 'intermediate',
   },
   {
     id: '22',
@@ -215,6 +326,10 @@ export const transitions: Transition[] = [
     description: 'Modern pixelation crossfade effect',
     cssFile: 'pixelate-dissolve.css',
     componentFile: 'theme-toggle.tsx',
+    category: 'organic',
+    tags: ['Creative', 'Digital', 'Modern'],
+    featured: true,
+    complexity: 'intermediate',
   },
   {
     id: '23',
@@ -223,6 +338,10 @@ export const transitions: Transition[] = [
     description: 'Organic wave sweeping across screen',
     cssFile: 'wave-reveal.css',
     componentFile: 'theme-toggle.tsx',
+    category: 'organic',
+    tags: ['Smooth', 'Natural', 'Creative'],
+    featured: false,
+    complexity: 'intermediate',
   },
   {
     id: '27',
@@ -231,6 +350,10 @@ export const transitions: Transition[] = [
     description: '3D perspective travel with depth and rotation',
     cssFile: 'perspective-travel.css',
     componentFile: 'theme-toggle.tsx',
+    category: '3d',
+    tags: ['Cinematic', 'Bold', 'Immersive'],
+    featured: true,
+    complexity: 'advanced',
   },
   {
     id: '28',
@@ -239,6 +362,10 @@ export const transitions: Transition[] = [
     description: 'Dynamic diagonal sweep from corner to corner',
     cssFile: 'diagonal-wipe.css',
     componentFile: 'theme-toggle.tsx',
+    category: 'wipes',
+    tags: ['Dynamic', 'Modern', 'Bold'],
+    featured: false,
+    complexity: 'simple',
   },
   {
     id: '30',
@@ -247,6 +374,10 @@ export const transitions: Transition[] = [
     description: '3D card flip with perspective and depth',
     cssFile: 'flip-3d.css',
     componentFile: 'theme-toggle.tsx',
+    category: '3d',
+    tags: ['Cinematic', 'Immersive', 'Bold'],
+    featured: false,
+    complexity: 'advanced',
   },
   {
     id: '32',
@@ -255,6 +386,10 @@ export const transitions: Transition[] = [
     description: 'Staggered columns sliding down with wave effect',
     cssFile: 'columns-slide.css',
     componentFile: 'theme-toggle.tsx',
+    category: 'wipes',
+    tags: ['Creative', 'Structured', 'Dynamic'],
+    featured: true,
+    complexity: 'intermediate',
   },
   {
     id: '33',
@@ -263,6 +398,10 @@ export const transitions: Transition[] = [
     description: 'Rotating spiral expanding from center outward',
     cssFile: 'spiral-wipe.css',
     componentFile: 'theme-toggle.tsx',
+    category: 'geometric',
+    tags: ['Creative', 'Dynamic', 'Unique'],
+    featured: false,
+    complexity: 'advanced',
   },
   {
     id: '34',
@@ -271,6 +410,10 @@ export const transitions: Transition[] = [
     description: 'Camera iris diaphragm opening from center',
     cssFile: 'iris-reveal.css',
     componentFile: 'theme-toggle.tsx',
+    category: 'geometric',
+    tags: ['Cinematic', 'Professional', 'Smooth'],
+    featured: false,
+    complexity: 'advanced',
   },
   {
     id: '35',
@@ -279,6 +422,10 @@ export const transitions: Transition[] = [
     description: 'Dynamic skewed sliding transition',
     cssFile: 'skew-slide.css',
     componentFile: 'theme-toggle.tsx',
+    category: '3d',
+    tags: ['Dynamic', 'Modern', 'Bold'],
+    featured: false,
+    complexity: 'intermediate',
   },
 ];
 
