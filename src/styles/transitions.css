@@ -1,5 +1,5 @@
 /* Import all transition styles */
-@import './transitions/theme-toggle.css';
+@import './transitions/circular-reveal.css';
 @import './transitions/vertical-wipe.css';
 @import './transitions/circle-with-blur.css';
 @import './transitions/circle-blur-top-left.css';

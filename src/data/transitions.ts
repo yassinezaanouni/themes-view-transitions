@@ -39,7 +39,7 @@ export const transitions: Transition[] = [
     title: 'Circular Reveal Theme',
     slug: 'theme-toggle',
     description: 'Circular reveal animation for theme switching',
-    cssFile: 'theme-toggle.css',
+    cssFile: 'circular-reveal.css',
     componentFile: 'theme-toggle.tsx',
   },
   {
