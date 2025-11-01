@@ -6,6 +6,12 @@ export type TransitionType =
   | 'polygon'
   | 'gif-dance'
   | 'gif-love'
+  | 'gif-heart'
+  | 'gif-letter'
+  | 'gif-loveyou'
+  | 'gif-mad'
+  | 'gif-punch'
+  | 'gif-explosion'
   | 'horizontal-wipe'
   | 'slide-from-bottom'
   | 'hexagon-reveal'
@@ -88,6 +94,54 @@ export const transitions: Transition[] = [
     slug: 'gif-love',
     description: 'Love-themed animated transition',
     cssFile: 'gif-love.css',
+    componentFile: 'theme-toggle.tsx',
+  },
+  {
+    id: '11a',
+    title: 'Heart GIF Theme',
+    slug: 'gif-heart',
+    description: 'Heart love animated transition',
+    cssFile: 'gif-heart.css',
+    componentFile: 'theme-toggle.tsx',
+  },
+  {
+    id: '11b',
+    title: 'Love Letter GIF Theme',
+    slug: 'gif-letter',
+    description: 'Love letter animated transition',
+    cssFile: 'gif-letter.css',
+    componentFile: 'theme-toggle.tsx',
+  },
+  {
+    id: '11c',
+    title: 'Love You GIF Theme',
+    slug: 'gif-loveyou',
+    description: 'Love you animated transition',
+    cssFile: 'gif-loveyou.css',
+    componentFile: 'theme-toggle.tsx',
+  },
+  {
+    id: '11d',
+    title: 'Mad GIF Theme',
+    slug: 'gif-mad',
+    description: 'Mad animated transition',
+    cssFile: 'gif-mad.css',
+    componentFile: 'theme-toggle.tsx',
+  },
+  {
+    id: '11e',
+    title: 'Punch GIF Theme',
+    slug: 'gif-punch',
+    description: 'Punch animated transition',
+    cssFile: 'gif-punch.css',
+    componentFile: 'theme-toggle.tsx',
+  },
+  {
+    id: '11f',
+    title: 'Explosion GIF Theme',
+    slug: 'gif-explosion',
+    description: 'Explosion animated transition',
+    cssFile: 'gif-explosion.css',
     componentFile: 'theme-toggle.tsx',
   },
   {

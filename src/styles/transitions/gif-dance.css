@@ -5,7 +5,8 @@ html.gif-dance-transition::view-transition-group(root) {
 }
 
 html.gif-dance-transition::view-transition-new(root) {
-  mask: url('https://media.tenor.com/cyORI7kwShQAAAAi/shigure-ui-dance.gif') center / 0 no-repeat;
+  mask: url('https://media.tenor.com/cyORI7kwShQAAAAi/shigure-ui-dance.gif')
+    center / 0 no-repeat;
   animation: gif-scale 3s;
   animation-fill-mode: both;
 }

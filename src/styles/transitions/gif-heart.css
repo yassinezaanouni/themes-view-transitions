@@ -1,0 +1,32 @@
+/* GIF Heart Theme Transition */
+
+html.gif-heart-transition::view-transition-group(root) {
+  animation-timing-function: var(--expo-in);
+}
+
+html.gif-heart-transition::view-transition-new(root) {
+  mask: url('https://media.tenor.com/oaUwWAnWcR4AAAAi/i-love-you-love-you.gif') center / 0 no-repeat;
+  animation: gif-scale 3s;
+  animation-fill-mode: both;
+}
+
+html.gif-heart-transition::view-transition-old(root),
+html.gif-heart-transition.dark::view-transition-old(root) {
+  animation: gif-scale 3s;
+  animation-fill-mode: both;
+}
+
+@keyframes gif-scale {
+  0% {
+    mask-size: 0;
+  }
+  10% {
+    mask-size: 50vmax;
+  }
+  90% {
+    mask-size: 50vmax;
+  }
+  100% {
+    mask-size: 2000vmax;
+  }
+}

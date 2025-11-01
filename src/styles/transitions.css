@@ -6,6 +6,13 @@
 @import './transitions/polygon.css';
 @import './transitions/gif-dance.css';
 @import './transitions/gif-love.css';
+@import './transitions/gif-heart.css';
+@import './transitions/gif-letter.css';
+@import './transitions/gif-loveyou.css';
+@import './transitions/gif-mad.css';
+@import './transitions/gif-punch.css';
+@import './transitions/gif-explosion.css';
+@import './transitions/gif-checkmark.css';
 @import './transitions/horizontal-wipe.css';
 @import './transitions/slide-from-bottom.css';
 @import './transitions/hexagon-reveal.css';
