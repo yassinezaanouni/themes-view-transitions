@@ -56,7 +56,21 @@ export function CodeBlock({ code, language, metadata }: CodeBlockProps) {
             {Array.from({ length: 20 }).map((_, i) => (
               <div
                 key={i}
-                className={`bg-muted-foreground/20 h-4 w-${['3/4', 'full', '5/6', '4/5', 'full', '2/3', '4/5', '3/4', 'full', '2/3'][i % 10]} rounded`}
+                className="bg-muted-foreground/20 h-4 rounded"
+                style={{
+                  width: [
+                    '75%',
+                    '100%',
+                    '83.3333%',
+                    '80%',
+                    '100%',
+                    '66.6667%',
+                    '80%',
+                    '75%',
+                    '100%',
+                    '66.6667%',
+                  ][i % 10],
+                }}
               />
             ))}
           </div>
