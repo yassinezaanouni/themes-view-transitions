@@ -1,0 +1,70 @@
+/* Perspective Travel Theme Transition */
+
+html.perspective-travel-transition {
+  --perspective: 400vmax;
+  --distance: -0.75;
+  --duration: 1.2s;
+  --ease: ease-in-out;
+}
+
+html.perspective-travel-transition::view-transition-group(root) {
+  animation-duration: var(--duration);
+}
+
+html.perspective-travel-transition::view-transition-new(root),
+html.perspective-travel-transition::view-transition-old(root) {
+  transform: perspective(var(--perspective)) translate3d(0, 0, 0);
+  animation: travel var(--duration);
+  backface-visibility: hidden;
+}
+
+html.perspective-travel-transition::view-transition-new(root) {
+  --rotation-start: 90deg;
+  --rotation-end: 0deg;
+  --depth-start: 1;
+  --depth-end: 0;
+}
+
+html.perspective-travel-transition::view-transition-old(root) {
+  --depth-end: 1;
+  --depth-start: 0;
+  --rotation-start: 0deg;
+  --rotation-end: -90deg;
+}
+
+@keyframes travel {
+  0% {
+    animation-timing-function: ease-in;
+    transform: perspective(var(--perspective))
+      translate3d(
+        0,
+        0,
+        calc((var(--perspective) * var(--distance)) * var(--depth-start))
+      )
+      rotateY(var(--rotation-start, 0deg))
+      translate3d(0, 0, calc(50vw * var(--depth-start)));
+  }
+  25% {
+    animation-timing-function: var(--ease);
+    transform: perspective(var(--perspective))
+      translate3d(0, 0, calc(var(--perspective) * var(--distance)))
+      rotateY(var(--rotation-start, 0deg)) translate3d(0, 0, 50vw);
+  }
+  75% {
+    animation-timing-function: var(--ease);
+    transform: perspective(var(--perspective))
+      translate3d(0, 0, calc(var(--perspective) * var(--distance)))
+      rotateY(var(--rotation-end, -90deg)) translate3d(0, 0, 50vw);
+  }
+  100% {
+    animation-timing-function: var(--ease);
+    transform: perspective(var(--perspective))
+      translate3d(
+        0,
+        0,
+        calc((var(--perspective) * var(--distance)) * var(--depth-end))
+      )
+      rotateY(var(--rotation-end, 0deg))
+      translate3d(0, 0, calc(50vw * var(--depth-end)));
+  }
+}

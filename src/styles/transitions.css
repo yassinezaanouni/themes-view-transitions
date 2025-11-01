@@ -16,7 +16,7 @@
 @import './transitions/zoom-blur.css';
 @import './transitions/pixelate-dissolve.css';
 @import './transitions/wave-reveal.css';
-@import './transitions/gradient-wipe.css';
+@import './transitions/perspective-travel.css';
 @import './transitions/diagonal-wipe.css';
 @import './transitions/flip-3d.css';
 @import './transitions/columns-slide.css';

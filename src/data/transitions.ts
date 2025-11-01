@@ -16,7 +16,7 @@ export type TransitionType =
   | 'zoom-blur'
   | 'pixelate-dissolve'
   | 'wave-reveal'
-  | 'gradient-wipe'
+  | 'perspective-travel'
   | 'diagonal-wipe'
   | 'flip-3d'
   | 'columns-slide';
@@ -169,10 +169,10 @@ export const transitions: Transition[] = [
   },
   {
     id: '27',
-    title: 'Gradient Wipe',
-    slug: 'gradient-wipe',
-    description: 'Smooth gradient-based sweep transition',
-    cssFile: 'gradient-wipe.css',
+    title: 'Perspective Travel',
+    slug: 'perspective-travel',
+    description: '3D perspective travel with depth and rotation',
+    cssFile: 'perspective-travel.css',
     componentFile: 'theme-toggle.tsx',
   },
   {
