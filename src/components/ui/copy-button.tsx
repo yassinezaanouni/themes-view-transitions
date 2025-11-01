@@ -9,9 +9,10 @@ import { Button } from './button';
 interface CopyButtonProps {
   text: string;
   className?: string;
+  onCopy?: () => void;
 }
 
-export function CopyButton({ text, className }: CopyButtonProps) {
+export function CopyButton({ text, className, onCopy }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout>(undefined);
 
@@ -21,6 +22,9 @@ export function CopyButton({ text, className }: CopyButtonProps) {
     try {
       await navigator.clipboard.writeText(text);
       setCopied(true);
+
+      // Call the optional onCopy callback for analytics
+      onCopy?.();
 
       clearTimeout(timeoutRef.current);
       timeoutRef.current = setTimeout(() => {

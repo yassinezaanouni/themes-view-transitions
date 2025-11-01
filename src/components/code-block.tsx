@@ -2,6 +2,7 @@
 
 import { useTheme } from 'next-themes';
 import { startTransition, useEffect, useState } from 'react';
+import { usePostHog } from 'posthog-js/react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import {
   oneDark,
@@ -13,11 +14,17 @@ import { CopyButton } from '@/components/ui/copy-button';
 interface CodeBlockProps {
   code: string;
   language: string;
+  metadata?: {
+    transitionName?: string;
+    transitionSlug?: string;
+    codeType?: string;
+  };
 }
 
-export function CodeBlock({ code, language }: CodeBlockProps) {
+export function CodeBlock({ code, language, metadata }: CodeBlockProps) {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const posthog = usePostHog();
 
   useEffect(() => {
     startTransition(() => {
@@ -25,9 +32,23 @@ export function CodeBlock({ code, language }: CodeBlockProps) {
     });
   }, []);
 
+  const handleCopy = () => {
+    posthog?.capture('code_copied', {
+      language,
+      code_length: code.length,
+      transition_name: metadata?.transitionName,
+      transition_slug: metadata?.transitionSlug,
+      code_type: metadata?.codeType,
+    });
+  };
+
   return (
     <div className="group relative">
-      <CopyButton text={code} className="absolute top-2 right-2 z-10" />
+      <CopyButton
+        text={code}
+        className="absolute top-2 right-2 z-10"
+        onCopy={handleCopy}
+      />
       <div className="border-border overflow-hidden rounded-lg border">
         {!mounted ? (
           // Loading skeleton that works in both themes

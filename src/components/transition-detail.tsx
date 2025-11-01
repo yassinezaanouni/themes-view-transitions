@@ -3,6 +3,7 @@
 import { ChevronLeft, Play } from 'lucide-react';
 import { motion as m } from 'motion/react';
 import Link from 'next/link';
+import { usePostHog } from 'posthog-js/react';
 import { useRef } from 'react';
 
 import { CodeBlock } from '@/components/code-block';
@@ -31,9 +32,27 @@ export function TransitionDetail({
   componentCode,
 }: TransitionDetailProps) {
   const themeToggleRef = useRef<ThemeToggleRef>(null);
+  const posthog = usePostHog();
 
   const replayTransition = () => {
+    // Track play transition button click in detail page
+    posthog?.capture('play_transition_button_clicked', {
+      transition_name: transition.title,
+      transition_slug: transition.slug,
+      transition_category: transition.category,
+      is_featured: transition.featured || false,
+      location: 'detail_page',
+    });
+
     themeToggleRef.current?.triggerTransition();
+  };
+
+  const handleTabChange = (value: string) => {
+    posthog?.capture('code_tab_switched', {
+      transition_name: transition.title,
+      transition_slug: transition.slug,
+      tab_value: value,
+    });
   };
 
   return (
@@ -152,16 +171,36 @@ export function TransitionDetail({
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Tabs defaultValue="css" className="w-full">
+              <Tabs
+                defaultValue="css"
+                className="w-full"
+                onValueChange={handleTabChange}
+              >
                 <TabsList className="grid w-full grid-cols-2">
                   <TabsTrigger value="css">Global CSS</TabsTrigger>
                   <TabsTrigger value="component">Component</TabsTrigger>
                 </TabsList>
                 <TabsContent value="css" className="mt-4">
-                  <CodeBlock code={globalCss} language="css" />
+                  <CodeBlock
+                    code={globalCss}
+                    language="css"
+                    metadata={{
+                      transitionName: transition.title,
+                      transitionSlug: transition.slug,
+                      codeType: 'css',
+                    }}
+                  />
                 </TabsContent>
                 <TabsContent value="component" className="mt-4">
-                  <CodeBlock code={componentCode} language="tsx" />
+                  <CodeBlock
+                    code={componentCode}
+                    language="tsx"
+                    metadata={{
+                      transitionName: transition.title,
+                      transitionSlug: transition.slug,
+                      codeType: 'component',
+                    }}
+                  />
                 </TabsContent>
               </Tabs>
             </CardContent>

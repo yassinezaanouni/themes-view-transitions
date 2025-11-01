@@ -3,6 +3,7 @@
 import { motion as m } from 'motion/react';
 import { useTheme } from 'next-themes';
 import { forwardRef, useImperativeHandle, useRef } from 'react';
+import { usePostHog } from 'posthog-js/react';
 
 import { Button } from '@/components/ui/button';
 import { TransitionType } from '@/data/transitions';
@@ -19,12 +20,22 @@ export const ThemeToggle = forwardRef<ThemeToggleRef, ThemeToggleProps>(
   ({ transitionType = 'circular-reveal' }, ref) => {
     const { theme, setTheme } = useTheme();
     const buttonRef = useRef<HTMLButtonElement>(null);
+    const posthog = usePostHog();
 
     const toggleTheme = async () => {
       const newTheme = theme === 'dark' ? 'light' : 'dark';
       const prefersReducedMotion = window.matchMedia(
         '(prefers-reduced-motion: reduce)',
       ).matches;
+
+      // Track theme toggle event
+      posthog?.capture('theme_toggle', {
+        from_theme: theme,
+        to_theme: newTheme,
+        transition_type: transitionType,
+        uses_transition: !(!document.startViewTransition || prefersReducedMotion),
+        prefers_reduced_motion: prefersReducedMotion,
+      });
 
       if (!document.startViewTransition || prefersReducedMotion) {
         setTheme(newTheme);

@@ -2,6 +2,7 @@
 
 import { ArrowRight, Play, Sparkles } from 'lucide-react';
 import Link from 'next/link';
+import { usePostHog } from 'posthog-js/react';
 import { useRef } from 'react';
 
 import { ThemeToggle, ThemeToggleRef } from '@/components/theme-toggle';
@@ -23,14 +24,36 @@ interface TransitionCardProps {
 
 export function TransitionCard({ transition }: TransitionCardProps) {
   const themeToggleRef = useRef<ThemeToggleRef>(null);
+  const posthog = usePostHog();
 
   const handlePlayClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+
+    // Track play transition button click
+    posthog?.capture('play_transition_button_clicked', {
+      transition_name: transition.title,
+      transition_slug: transition.slug,
+      transition_category: transition.category,
+      is_featured: transition.featured || false,
+      location: 'card',
+    });
+
     themeToggleRef.current?.triggerTransition();
   };
+
+  const handleCardClick = () => {
+    // Track transition card click (navigating to detail page)
+    posthog?.capture('transition_card_clicked', {
+      transition_name: transition.title,
+      transition_slug: transition.slug,
+      transition_category: transition.category,
+      is_featured: transition.featured || false,
+    });
+  };
+
   return (
-    <Link href={`/transition/${transition.slug}`}>
+    <Link href={`/transition/${transition.slug}`} onClick={handleCardClick}>
       <div>
         <Card className="group hover:shadow-primary/5 relative cursor-pointer overflow-hidden transition-all duration-300 hover:shadow-lg">
           <div className="from-primary/5 to-chart-1/5 pointer-events-none absolute inset-0 bg-linear-to-br via-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
