@@ -102,9 +102,9 @@ export default function Home() {
       )}
 
       {/* Category Sections */}
-      {categories.map((category) => (
+      {categories.map((category, index) => (
         <CategorySection
-          key={category.key}
+          key={index}
           category={category.key}
           transitions={transitionsByCategory[category.key] || []}
           title={category.title}
