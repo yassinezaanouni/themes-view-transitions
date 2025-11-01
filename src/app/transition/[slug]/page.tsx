@@ -30,7 +30,36 @@ export default async function TransitionPage({ params }: TransitionPageProps) {
   const componentFilePath = join(process.cwd(), 'src', 'components', transition.componentFile);
 
   const transitionCss = await readFile(cssFilePath, 'utf-8');
-  const componentCode = await readFile(componentFilePath, 'utf-8');
+  let componentCode = await readFile(componentFilePath, 'utf-8');
+
+  // Replace the transitionType prop with the specific transition slug
+  const transitionClass = transition.slug === 'theme-toggle'
+    ? 'theme-transition'
+    : `${transition.slug}-transition`;
+
+  componentCode = componentCode
+    // Remove TransitionType import
+    .replace(/import \{ TransitionType \} from '@\/data\/transitions';\n/g, '')
+    // Remove ThemeToggleRef interface
+    .replace(/export interface ThemeToggleRef \{[^}]+\}\n\n/g, '')
+    // Remove ThemeToggleProps interface
+    .replace(/interface ThemeToggleProps \{[^}]*\}\n\n/g, '')
+    // Remove forwardRef wrapper and convert to normal component
+    .replace(
+      /export const ThemeToggle = forwardRef<ThemeToggleRef, ThemeToggleProps>\(\s*\([^)]*\)\s*=>\s*\{/,
+      'export const ThemeToggle = () => {'
+    )
+    // Remove the closing forwardRef
+    .replace(/\},\n\);\n\nThemeToggle\.displayName = 'ThemeToggle';/, '};')
+    // Remove useImperativeHandle hook
+    .replace(/\s*useImperativeHandle\([\s\S]*?\}\)\);?\s*/g, '')
+    // Replace transitionType variable usage with hardcoded value
+    .replace(/\btransitionType\b/g, `'${transition.slug}'`)
+    // Replace the entire transition class mapping logic with hardcoded value
+    .replace(
+      /\/\/ Map transition type to CSS class\n\s*const transitionClass\s*=[^;]+;/,
+      `// Map transition type to CSS class\n      const transitionClass = '${transitionClass}';`
+    );
 
   // Check if the CSS uses expo timing functions
   const usesExpoIn = transitionCss.includes('var(--expo-in)');

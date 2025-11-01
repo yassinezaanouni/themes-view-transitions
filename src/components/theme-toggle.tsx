@@ -20,6 +20,52 @@ export const ThemeToggle = forwardRef<ThemeToggleRef, ThemeToggleProps>(
     const { theme, setTheme } = useTheme();
     const buttonRef = useRef<HTMLButtonElement>(null);
 
+    const toggleTheme = async () => {
+      const newTheme = theme === 'dark' ? 'light' : 'dark';
+      const prefersReducedMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)',
+      ).matches;
+
+      if (!document.startViewTransition || prefersReducedMotion) {
+        setTheme(newTheme);
+        return;
+      }
+
+      // This's only necessary for some transitions that use the --x and --y variables to position the animation
+      const rect = buttonRef.current?.getBoundingClientRect();
+      if (rect) {
+        const x = (rect.left + rect.right) / 2;
+        const y = (rect.top + rect.bottom) / 2;
+
+        document.documentElement.style.setProperty(
+          '--x',
+          `${(x / window.innerWidth) * 100}%`,
+        );
+        document.documentElement.style.setProperty(
+          '--y',
+          `${(y / window.innerHeight) * 100}%`,
+        );
+      }
+
+      // Map transition type to CSS class
+      const transitionClass =
+        transitionType === 'theme-toggle'
+          ? 'theme-transition'
+          : `${transitionType}-transition`;
+
+      document.documentElement.classList.add(transitionClass);
+
+      const transition = document.startViewTransition(() => {
+        setTheme(newTheme);
+      });
+
+      try {
+        await transition.finished;
+      } finally {
+        document.documentElement.classList.remove(transitionClass);
+      }
+    };
+
     const shineVariant = {
       hidden: {
         opacity: 0,
@@ -71,51 +117,6 @@ export const ThemeToggle = forwardRef<ThemeToggleRef, ThemeToggleProps>(
           scale: { duration: 0.3 },
         },
       },
-    };
-
-    const toggleTheme = async () => {
-      const newTheme = theme === 'dark' ? 'light' : 'dark';
-      const prefersReducedMotion = window.matchMedia(
-        '(prefers-reduced-motion: reduce)',
-      ).matches;
-
-      if (!document.startViewTransition || prefersReducedMotion) {
-        setTheme(newTheme);
-        return;
-      }
-
-      const rect = buttonRef.current?.getBoundingClientRect();
-      if (rect) {
-        const x = (rect.left + rect.right) / 2;
-        const y = (rect.top + rect.bottom) / 2;
-
-        document.documentElement.style.setProperty(
-          '--x',
-          `${(x / window.innerWidth) * 100}%`,
-        );
-        document.documentElement.style.setProperty(
-          '--y',
-          `${(y / window.innerHeight) * 100}%`,
-        );
-      }
-
-      // Map transition type to CSS class
-      const transitionClass =
-        transitionType === 'theme-toggle'
-          ? 'theme-transition'
-          : `${transitionType}-transition`;
-
-      document.documentElement.classList.add(transitionClass);
-
-      const transition = document.startViewTransition(() => {
-        setTheme(newTheme);
-      });
-
-      try {
-        await transition.finished;
-      } finally {
-        document.documentElement.classList.remove(transitionClass);
-      }
     };
 
     const sunPath =
