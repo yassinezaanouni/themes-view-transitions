@@ -1,18 +1,18 @@
-/* GIF Mad Theme Transition */
+/* GIF Fire Theme Transition */
 
-html.gif-mad-transition::view-transition-group(root) {
+html.gif-fire-transition::view-transition-group(root) {
   animation-timing-function: var(--expo-in);
 }
 
-html.gif-mad-transition::view-transition-new(root) {
+html.gif-fire-transition::view-transition-new(root) {
   mask: url('https://media.tenor.com/9sSTiaKKvIAAAAAi/mad.gif') center / 0
     no-repeat;
   animation: gif-scale 1s;
   animation-fill-mode: both;
 }
 
-html.gif-mad-transition::view-transition-old(root),
-html.gif-mad-transition.dark::view-transition-old(root) {
+html.gif-fire-transition::view-transition-old(root),
+html.gif-fire-transition.dark::view-transition-old(root) {
   animation: gif-scale 1s;
   animation-fill-mode: both;
 }

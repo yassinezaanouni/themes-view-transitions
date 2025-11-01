@@ -9,10 +9,9 @@ export type TransitionType =
   | 'gif-heart'
   | 'gif-letter'
   | 'gif-loveyou'
-  | 'gif-mad'
+  | 'gif-fire'
   | 'gif-punch'
   | 'gif-explosion'
-  | 'gif-checkmark'
   | 'horizontal-wipe'
   | 'slide-from-bottom'
   | 'hexagon-reveal'
@@ -177,13 +176,13 @@ export const transitions: Transition[] = [
   },
   {
     id: '11d',
-    title: 'Mad GIF Theme',
-    slug: 'gif-mad',
-    description: 'Mad animated transition',
-    cssFile: 'gif-mad.css',
+    title: 'Fire GIF Theme',
+    slug: 'gif-fire',
+    description: 'Fire flame animated transition',
+    cssFile: 'gif-fire.css',
     componentFile: 'theme-toggle.tsx',
     category: 'fun',
-    tags: ['Playful', 'Expressive', 'Fun'],
+    tags: ['Playful', 'Dynamic', 'Fun'],
     featured: false,
     complexity: 'simple',
   },
@@ -208,18 +207,6 @@ export const transitions: Transition[] = [
     componentFile: 'theme-toggle.tsx',
     category: 'fun',
     tags: ['Playful', 'Dramatic', 'Fun'],
-    featured: false,
-    complexity: 'simple',
-  },
-  {
-    id: '11g',
-    title: 'Checkmark GIF Theme',
-    slug: 'gif-checkmark',
-    description: 'Checkmark success animated transition',
-    cssFile: 'gif-checkmark.css',
-    componentFile: 'theme-toggle.tsx',
-    category: 'fun',
-    tags: ['Playful', 'Success', 'Fun'],
     featured: false,
     complexity: 'simple',
   },
