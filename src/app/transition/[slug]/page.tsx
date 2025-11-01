@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
-import { transitions } from '@/data/transitions';
+
 import { TransitionDetail } from '@/components/transition-detail';
+import { transitions } from '@/data/transitions';
 
 interface TransitionPageProps {
   params: Promise<{

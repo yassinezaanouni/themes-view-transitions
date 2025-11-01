@@ -1,11 +1,15 @@
+import { notFound } from "next/navigation";
+
 import { CodeBlock } from "@/components/code/code-block";
-import { transitionDemos, type TransitionSlug } from "@/components/transition-registry";
+import {
+  transitionDemos,
+  type TransitionSlug,
+} from "@/components/transition-registry";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ViewTransitionLink } from "@/components/view-transition-link";
 import { getTransitionBySlug, transitions } from "@/data/transitions";
-import { notFound } from "next/navigation";
 
 interface TransitionPageProps {
   params: { slug: string };
@@ -72,7 +76,11 @@ export default async function TransitionPage({ params }: TransitionPageProps) {
               </div>
             </div>
             <div className="flex gap-3">
-              <Button asChild variant="secondary" className="rounded-full px-6 py-6">
+              <Button
+                asChild
+                variant="secondary"
+                className="rounded-full px-6 py-6"
+              >
                 <a
                   href="https://www.w3.org/TR/css-view-transitions-1/"
                   target="_blank"
@@ -103,7 +111,11 @@ export default async function TransitionPage({ params }: TransitionPageProps) {
                 Implementation notes
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-[color-mix(in_oklch,var(--color-muted-foreground)_80%,transparent)]">
-                Use view-transition-name on the surfaces that should keep their identity across frames. For theme transitions, clear the page-transition class to avoid animation conflicts and always honour reduced motion preferences by short-circuiting to simple state updates.
+                Use view-transition-name on the surfaces that should keep their
+                identity across frames. For theme transitions, clear the
+                page-transition class to avoid animation conflicts and always
+                honour reduced motion preferences by short-circuiting to simple
+                state updates.
               </p>
             </div>
           </div>
@@ -114,20 +126,37 @@ export default async function TransitionPage({ params }: TransitionPageProps) {
                 <TabsTrigger value="component">component.tsx</TabsTrigger>
               </TabsList>
               <TabsContent value="global">
-                <CodeBlock code={transition.globalCss} language="css" filename="global.css" />
+                <CodeBlock
+                  code={transition.globalCss}
+                  language="css"
+                  filename="global.css"
+                />
               </TabsContent>
               <TabsContent value="component">
-                <CodeBlock code={transition.componentCode} language="tsx" filename="component.tsx" />
+                <CodeBlock
+                  code={transition.componentCode}
+                  language="tsx"
+                  filename="component.tsx"
+                />
               </TabsContent>
             </Tabs>
             <div className="rounded-[calc(var(--radius-xl))] border border-border/60 bg-[color-mix(in_oklch,var(--color-card)_94%,transparent)] p-6 text-sm text-[color-mix(in_oklch,var(--color-muted-foreground)_78%,transparent)] shadow-[0px_24px_60px_-48px_color-mix(in_oklch,var(--color-ring)_35%,transparent)]">
-              <h3 className="text-base font-semibold text-[var(--color-card-foreground)]">
+              <h3 className="text-base font-semibold text-card-foreground">
                 Replay tips
               </h3>
               <ul className="mt-3 space-y-2 text-[13px] leading-relaxed">
-                <li>• Batch DOM updates inside document.startViewTransition to keep paints atomic.</li>
-                <li>• Populate semantic tokens before animations so tokens interpolate without flashes.</li>
-                <li>• Respect prefers-reduced-motion and provide shortcuts for keyboard-triggered toggles.</li>
+                <li>
+                  • Batch DOM updates inside document.startViewTransition to
+                  keep paints atomic.
+                </li>
+                <li>
+                  • Populate semantic tokens before animations so tokens
+                  interpolate without flashes.
+                </li>
+                <li>
+                  • Respect prefers-reduced-motion and provide shortcuts for
+                  keyboard-triggered toggles.
+                </li>
               </ul>
             </div>
           </aside>

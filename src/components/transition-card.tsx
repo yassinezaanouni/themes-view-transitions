@@ -1,10 +1,17 @@
-'use client';
+"use client";
 
-import { motion as m } from 'motion/react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ViewTransitionLink } from '@/components/view-transition-link';
-import { Transition } from '@/data/transitions';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight } from "lucide-react";
+import { motion as m } from "motion/react";
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { ViewTransitionLink } from "@/components/view-transition-link";
+import { Transition } from "@/data/transitions";
 
 interface TransitionCardProps {
   transition: Transition;
@@ -19,9 +26,9 @@ export function TransitionCard({ transition, index }: TransitionCardProps) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: index * 0.1 }}
       >
-        <Card className="group relative overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1 cursor-pointer">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-chart-1/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          
+        <Card className="group relative overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 cursor-pointer">
+          <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-chart-1/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
           <CardHeader>
             <div className="flex items-start justify-between">
               <div className="space-y-1">
@@ -33,11 +40,11 @@ export function TransitionCard({ transition, index }: TransitionCardProps) {
               <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
             </div>
           </CardHeader>
-          
+
           <CardContent>
             <div className="relative h-32 rounded-md bg-muted/50 border border-border overflow-hidden">
               <div className="absolute inset-0 flex items-center justify-center">
-                {transition.category === 'Theme' ? (
+                {transition.category === "Theme" ? (
                   <m.div
                     className="h-16 w-16 rounded-full bg-gradient-to-br from-chart-1 to-chart-2"
                     animate={{
@@ -91,4 +98,3 @@ export function TransitionCard({ transition, index }: TransitionCardProps) {
     </ViewTransitionLink>
   );
 }
-

@@ -22,7 +22,7 @@ export function ViewTransitionLink({
       document.documentElement.classList.remove('theme-transition');
       document.documentElement.classList.add('page-transition');
 
-      (document as any).startViewTransition(() => {
+      (document as Document & { startViewTransition: (callback: () => void) => void }).startViewTransition(() => {
         router.push(href);
         setTimeout(() => {
           document.documentElement.classList.remove('page-transition');

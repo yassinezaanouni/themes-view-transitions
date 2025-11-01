@@ -1,5 +1,5 @@
-import { transitions } from '@/data/transitions';
 import { TransitionCard } from '@/components/transition-card';
+import { transitions } from '@/data/transitions';
 
 export default function Home() {
   return (

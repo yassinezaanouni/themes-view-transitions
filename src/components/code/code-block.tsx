@@ -1,10 +1,11 @@
 "use client";
 
+import type { Language, PrismTheme } from "prism-react-renderer";
+import { Highlight } from "prism-react-renderer";
+import { useCallback, useMemo, useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Highlight } from "prism-react-renderer";
-import type { Language, PrismTheme } from "prism-react-renderer";
-import { useCallback, useMemo, useState } from "react";
 
 const semanticTheme: PrismTheme = {
   plain: {

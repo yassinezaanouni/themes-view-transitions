@@ -1,8 +1,9 @@
 "use client";
 
+import { useEffect, useMemo, useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { useEffect, useMemo, useState } from "react";
 
 const metrics = [
   { key: "conversion", label: "Conversion", base: "64%", lifted: "68%" },

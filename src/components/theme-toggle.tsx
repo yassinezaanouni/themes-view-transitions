@@ -3,6 +3,7 @@
 import { motion as m } from 'motion/react';
 import { useTheme } from 'next-themes';
 import { useRef } from 'react';
+
 import { Button } from '@/components/ui/button';
 
 export function ThemeToggle() {
@@ -82,7 +83,7 @@ export function ThemeToggle() {
       document.documentElement.classList.remove('page-transition');
       document.documentElement.classList.add('theme-transition');
 
-      (document as any).startViewTransition(() => {
+      (document as Document & { startViewTransition: (callback: () => void) => void }).startViewTransition(() => {
         setTheme(theme === 'dark' ? 'light' : 'dark');
         setTimeout(() => {
           document.documentElement.classList.remove('theme-transition');

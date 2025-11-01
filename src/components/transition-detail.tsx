@@ -1,15 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { ArrowLeft, Play } from 'lucide-react';
 import { motion as m } from 'motion/react';
-import { Transition } from '@/data/transitions';
+import { useState } from 'react';
+
+import { CodeBlock } from '@/components/code-block';
+import { ThemeToggle } from '@/components/theme-toggle';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { CodeBlock } from '@/components/code-block';
 import { ViewTransitionLink } from '@/components/view-transition-link';
-import { ArrowLeft, Play } from 'lucide-react';
-import { ThemeToggle } from '@/components/theme-toggle';
+import { Transition } from '@/data/transitions';
 
 interface TransitionDetailProps {
   transition: Transition;
@@ -35,13 +36,24 @@ export function TransitionDetail({ transition }: TransitionDetailProps) {
 
       {/* Header */}
       <div className="space-y-2">
-        <div className="flex items-center gap-2">
-          <h1 className="text-4xl font-bold tracking-tight">
-            {transition.title}
-          </h1>
-          <span className="px-2 py-1 text-xs font-medium rounded-md bg-primary/10 text-primary">
-            {transition.category}
-          </span>
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <h1 className="text-4xl font-bold tracking-tight">
+              {transition.title}
+            </h1>
+            <span className="px-2 py-1 text-xs font-medium rounded-md bg-primary/10 text-primary">
+              {transition.category}
+            </span>
+          </div>
+          <Button asChild variant="outline">
+            <a
+              href="https://developer.chrome.com/docs/web-platform/view-transitions/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Docs
+            </a>
+          </Button>
         </div>
         <p className="text-lg text-muted-foreground">
           {transition.description}
@@ -111,9 +123,9 @@ export function TransitionDetail({ transition }: TransitionDetailProps) {
             <div className="rounded-lg bg-muted/50 p-4 space-y-2">
               <p className="text-sm font-medium">How it works:</p>
               <p className="text-sm text-muted-foreground">
-                Click the theme toggle button to see the circular reveal animation in action. 
-                The transition uses the View Transition API to create a smooth, animated 
-                theme switch that originates from the button's position.
+                Click the theme toggle button to see the circular reveal animation in action.
+                The transition uses the View Transition API to create a smooth, animated
+                theme switch that originates from the button&apos;s position.
               </p>
             </div>
           </CardContent>
@@ -141,39 +153,6 @@ export function TransitionDetail({ transition }: TransitionDetailProps) {
                   <CodeBlock code={transition.componentCode} language="tsx" />
                 </TabsContent>
               </Tabs>
-            </CardContent>
-          </Card>
-
-          {/* Additional Info */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Browser Support</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="text-sm">Chrome</span>
-                <span className="text-sm font-medium text-green-600 dark:text-green-400">
-                  ✓ Supported (111+)
-                </span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm">Edge</span>
-                <span className="text-sm font-medium text-green-600 dark:text-green-400">
-                  ✓ Supported (111+)
-                </span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm">Safari</span>
-                <span className="text-sm font-medium text-green-600 dark:text-green-400">
-                  ✓ Supported (18+)
-                </span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm">Firefox</span>
-                <span className="text-sm font-medium text-yellow-600 dark:text-yellow-400">
-                  ⚠ In Development
-                </span>
-              </div>
             </CardContent>
           </Card>
         </div>
