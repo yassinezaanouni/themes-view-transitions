@@ -17,6 +17,7 @@ import {
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Transition } from '@/data/transitions';
+import { EXTERNAL_LINKS } from '@/lib/constants';
 
 interface TransitionDetailProps {
   transition: Transition;
@@ -52,7 +53,7 @@ export function TransitionDetail({
           </div>
           <Button asChild variant="outline">
             <a
-              href="https://developer.chrome.com/docs/web-platform/view-transitions/"
+              href={EXTERNAL_LINKS.VIEW_TRANSITIONS_API_DOCS}
               target="_blank"
               rel="noreferrer"
             >

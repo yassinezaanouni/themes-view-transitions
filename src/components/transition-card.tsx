@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight, Play, Star } from 'lucide-react';
+import { ArrowRight, Play, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import { useRef } from 'react';
 
@@ -39,18 +39,17 @@ export function TransitionCard({ transition }: TransitionCardProps) {
             <div className="flex items-start justify-between">
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
-                  <CardTitle className="group-hover:text-primary text-xl transition-colors">
-                    {transition.title}
-                  </CardTitle>
                   {transition.featured && (
                     <Badge
                       variant="secondary"
-                      className="gap-1 border border-amber-500/30 bg-linear-to-r from-amber-500/10 to-orange-500/10 text-amber-700 dark:text-amber-400"
+                      className="h-6 w-6 items-center justify-center rounded-full border border-amber-500/30 bg-linear-to-r from-amber-500/10 to-orange-500/10 p-0 text-amber-700 dark:text-amber-400"
                     >
-                      <Star className="h-3 w-3 fill-current" />
-                      Featured
+                      <Sparkles className="h-3 w-3" />
                     </Badge>
                   )}
+                  <CardTitle className="group-hover:text-primary text-xl transition-colors">
+                    {transition.title}
+                  </CardTitle>
                 </div>
                 <CardDescription>{transition.description}</CardDescription>
               </div>

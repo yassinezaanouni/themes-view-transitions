@@ -6,6 +6,7 @@ import Link from "next/link";
 
 import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { EXTERNAL_LINKS } from "@/lib/constants";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -56,12 +57,12 @@ export default function RootLayout({
                   Built with View Transitions API by
                 </p>
                 <a
-                  href="https://x.com/YassineZaanouni"
+                  href={EXTERNAL_LINKS.X_URL}
                   target="_blank"
                   rel="noreferrer"
                   className="text-sm text-foreground hover:underline"
                 >
-                  @yassinezaanouni
+                  {EXTERNAL_LINKS.X_HANDLE}
                 </a>
               </div>
             </footer>

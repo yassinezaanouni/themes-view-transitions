@@ -9,6 +9,7 @@ import {
 
 import { CategorySection } from '@/components/category-section';
 import { CategoryType, transitions } from '@/data/transitions';
+import { EXTERNAL_LINKS } from '@/lib/constants';
 
 export default function Home() {
   // Group transitions by category
@@ -79,7 +80,7 @@ export default function Home() {
   return (
     <div className="space-y-20">
       {/* Header */}
-      <header className="relative mx-auto max-w-4xl space-y-6 pb-12 text-center">
+      <header className="relative space-y-6 border-b pb-12 text-center">
         <div className="from-primary/5 to-chart-1/5 pointer-events-none absolute inset-0 -z-10 rounded-3xl bg-linear-to-br via-transparent" />
 
         <div className="relative space-y-4">
@@ -93,20 +94,20 @@ export default function Home() {
               </span>
             </h1>
             <a
-              href="https://x.com/YassineZaanouni"
+              href={EXTERNAL_LINKS.X_URL}
               target="_blank"
               rel="noreferrer"
               className="text-muted-foreground hover:text-foreground inline-flex items-center gap-1 text-base transition-colors"
             >
               <span className="text-foreground/60">by</span>
-              <span className="font-medium">@yassinezaanouni</span>
+              <span className="font-medium">{EXTERNAL_LINKS.X_HANDLE}</span>
             </a>
           </div>
           <p className="text-muted-foreground mx-auto max-w-2xl text-xl font-light md:text-2xl">
             Explore {transitions.length} beautiful theme transitions powered by
             the <br className="hidden md:block" />
             <a
-              href="https://developer.chrome.com/docs/web-platform/view-transitions/"
+              href={EXTERNAL_LINKS.VIEW_TRANSITIONS_API_DOCS}
               target="_blank"
               rel="noreferrer"
               className="text-foreground font-medium hover:underline"
