@@ -68,37 +68,39 @@ export const ThemeToggle = forwardRef<ThemeToggleRef>((props, ref) => {
   };
 
   const toggleTheme = () => {
-    if (typeof document !== 'undefined' && 'startViewTransition' in document) {
-      const rect = buttonRef.current?.getBoundingClientRect();
-      if (rect) {
-        const x = (rect.left + rect.right) / 2;
-        const y = (rect.top + rect.bottom) / 2;
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
 
-        document.documentElement.style.setProperty(
-          '--x',
-          `${(x / window.innerWidth) * 100}%`,
-        );
-        document.documentElement.style.setProperty(
-          '--y',
-          `${(y / window.innerHeight) * 100}%`,
-        );
-      }
-
-      document.documentElement.classList.add('theme-transition');
-
-      (
-        document as Document & {
-          startViewTransition: (callback: () => void) => void;
-        }
-      ).startViewTransition(() => {
-        setTheme(theme === 'dark' ? 'light' : 'dark');
-        setTimeout(() => {
-          document.documentElement.classList.remove('theme-transition');
-        }, 600);
-      });
-    } else {
-      setTheme(theme === 'dark' ? 'light' : 'dark');
+    if (!document.startViewTransition || prefersReducedMotion) {
+      setTheme(newTheme);
+      return;
     }
+
+    const rect = buttonRef.current?.getBoundingClientRect();
+    if (rect) {
+      const x = (rect.left + rect.right) / 2;
+      const y = (rect.top + rect.bottom) / 2;
+
+      document.documentElement.style.setProperty(
+        '--x',
+        `${(x / window.innerWidth) * 100}%`,
+      );
+      document.documentElement.style.setProperty(
+        '--y',
+        `${(y / window.innerHeight) * 100}%`,
+      );
+    }
+
+    document.documentElement.classList.add('theme-transition');
+
+    document.startViewTransition(() => {
+      setTheme(newTheme);
+      setTimeout(() => {
+        document.documentElement.classList.remove('theme-transition');
+      }, 600);
+    });
   };
 
   const sunPath =
