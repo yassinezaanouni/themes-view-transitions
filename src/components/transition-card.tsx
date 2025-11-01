@@ -1,7 +1,6 @@
 'use client';
 
 import { ArrowRight, Play } from 'lucide-react';
-import { motion as m } from 'motion/react';
 import Link from 'next/link';
 import { useRef } from 'react';
 
@@ -31,11 +30,7 @@ export function TransitionCard({ transition, index }: TransitionCardProps) {
   };
   return (
     <Link href={`/transition/${transition.slug}`}>
-      <m.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: index * 0.1 }}
-      >
+      <div>
         <Card className="group hover:shadow-primary/5 relative cursor-pointer overflow-hidden transition-all duration-300 hover:shadow-lg">
           <div className="from-primary/5 to-chart-1/5 pointer-events-none absolute inset-0 bg-linear-to-br via-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
@@ -83,7 +78,7 @@ export function TransitionCard({ transition, index }: TransitionCardProps) {
             </Button>
           </CardContent>
         </Card>
-      </m.div>
+      </div>
     </Link>
   );
 }
