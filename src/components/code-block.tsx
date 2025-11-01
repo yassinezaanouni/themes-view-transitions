@@ -2,7 +2,10 @@
 
 import { useTheme } from 'next-themes';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import {
+  oneDark,
+  oneLight,
+} from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 import { CopyButton } from '@/components/ui/copy-button';
 
@@ -15,12 +18,9 @@ export function CodeBlock({ code, language }: CodeBlockProps) {
   const { theme } = useTheme();
 
   return (
-    <div className="relative group">
-      <CopyButton
-        text={code}
-        className="absolute right-2 top-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity"
-      />
-      <div className="rounded-lg overflow-hidden border border-border">
+    <div className="group relative">
+      <CopyButton text={code} className="absolute top-2 right-2 z-10" />
+      <div className="border-border overflow-hidden rounded-lg border">
         <SyntaxHighlighter
           language={language}
           style={theme === 'dark' ? oneDark : oneLight}
@@ -29,7 +29,8 @@ export function CodeBlock({ code, language }: CodeBlockProps) {
             padding: '1.5rem',
             fontSize: '0.875rem',
             lineHeight: '1.5',
-            background: theme === 'dark' ? 'oklch(0.205 0 0)' : 'oklch(0.985 0 0)',
+            background:
+              theme === 'dark' ? 'oklch(0.205 0 0)' : 'oklch(0.985 0 0)',
           }}
           showLineNumbers
         >
@@ -39,4 +40,3 @@ export function CodeBlock({ code, language }: CodeBlockProps) {
     </div>
   );
 }
-

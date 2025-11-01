@@ -3,12 +3,18 @@
 import { ArrowLeft, Play } from 'lucide-react';
 import { motion as m } from 'motion/react';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useRef } from 'react';
 
 import { CodeBlock } from '@/components/code-block';
-import { ThemeToggle } from '@/components/theme-toggle';
+import { ThemeToggle, ThemeToggleRef } from '@/components/theme-toggle';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Transition } from '@/data/transitions';
 
@@ -18,12 +24,15 @@ interface TransitionDetailProps {
   componentCode: string;
 }
 
-export function TransitionDetail({ transition, globalCss, componentCode }: TransitionDetailProps) {
-  const [isPlaying, setIsPlaying] = useState(false);
+export function TransitionDetail({
+  transition,
+  globalCss,
+  componentCode,
+}: TransitionDetailProps) {
+  const themeToggleRef = useRef<ThemeToggleRef>(null);
 
   const replayTransition = () => {
-    setIsPlaying(true);
-    setTimeout(() => setIsPlaying(false), 1000);
+    themeToggleRef.current?.triggerTransition();
   };
 
   return (
@@ -43,7 +52,7 @@ export function TransitionDetail({ transition, globalCss, componentCode }: Trans
             <h1 className="text-4xl font-bold tracking-tight">
               {transition.title}
             </h1>
-            <span className="px-2 py-1 text-xs font-medium rounded-md bg-primary/10 text-primary">
+            <span className="bg-primary/10 text-primary rounded-md px-2 py-1 text-xs font-medium">
               {transition.category}
             </span>
           </div>
@@ -57,15 +66,15 @@ export function TransitionDetail({ transition, globalCss, componentCode }: Trans
             </a>
           </Button>
         </div>
-        <p className="text-lg text-muted-foreground">
+        <p className="text-muted-foreground text-lg">
           {transition.description}
         </p>
       </div>
 
       {/* Main Content */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         {/* Demo Section */}
-        <Card className="lg:sticky lg:top-24 h-fit">
+        <Card className="h-fit lg:sticky lg:top-24">
           <CardHeader>
             <CardTitle>Live Demo</CardTitle>
             <CardDescription>
@@ -73,20 +82,15 @@ export function TransitionDetail({ transition, globalCss, componentCode }: Trans
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="relative aspect-video rounded-lg border border-border bg-muted/30 flex items-center justify-center overflow-hidden">
-              <m.div
-                key={isPlaying ? 'playing' : 'idle'}
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                className="flex items-center justify-center"
-              >
-                <ThemeToggle />
-              </m.div>
-              
+            <div className="border-border bg-muted/30 relative flex aspect-video items-center justify-center overflow-hidden rounded-lg border">
+              <div className="flex items-center justify-center">
+                <ThemeToggle ref={themeToggleRef} />
+              </div>
+
               {/* Decorative elements */}
-              <div className="absolute inset-0 pointer-events-none">
+              <div className="pointer-events-none absolute inset-0">
                 <m.div
-                  className="absolute top-4 left-4 h-12 w-12 rounded-full bg-chart-1/20"
+                  className="bg-chart-1/20 absolute top-4 left-4 h-12 w-12 rounded-full"
                   animate={{
                     scale: [1, 1.2, 1],
                     opacity: [0.3, 0.6, 0.3],
@@ -94,11 +98,11 @@ export function TransitionDetail({ transition, globalCss, componentCode }: Trans
                   transition={{
                     duration: 2,
                     repeat: Infinity,
-                    ease: "easeInOut",
+                    ease: 'easeInOut',
                   }}
                 />
                 <m.div
-                  className="absolute bottom-4 right-4 h-16 w-16 rounded-full bg-chart-2/20"
+                  className="bg-chart-2/20 absolute right-4 bottom-4 h-16 w-16 rounded-full"
                   animate={{
                     scale: [1, 1.3, 1],
                     opacity: [0.3, 0.6, 0.3],
@@ -106,7 +110,7 @@ export function TransitionDetail({ transition, globalCss, componentCode }: Trans
                   transition={{
                     duration: 2.5,
                     repeat: Infinity,
-                    ease: "easeInOut",
+                    ease: 'easeInOut',
                     delay: 0.5,
                   }}
                 />
@@ -117,17 +121,19 @@ export function TransitionDetail({ transition, globalCss, componentCode }: Trans
               onClick={replayTransition}
               className="w-full gap-2"
               variant="outline"
+              size="lg"
             >
               <Play className="h-4 w-4" />
-              Replay Transition
+              Play Theme Transition
             </Button>
 
-            <div className="rounded-lg bg-muted/50 p-4 space-y-2">
+            <div className="bg-muted/50 space-y-2 rounded-lg p-4">
               <p className="text-sm font-medium">How it works:</p>
-              <p className="text-sm text-muted-foreground">
-                Click the theme toggle button to see the circular reveal animation in action.
-                The transition uses the View Transition API to create a smooth, animated
-                theme switch that originates from the button&apos;s position.
+              <p className="text-muted-foreground text-sm">
+                Click the theme toggle button to see the circular reveal
+                animation in action. The transition uses the View Transition API
+                to create a smooth, animated theme switch that originates from
+                the button&apos;s position.
               </p>
             </div>
           </CardContent>
@@ -162,4 +168,3 @@ export function TransitionDetail({ transition, globalCss, componentCode }: Trans
     </div>
   );
 }
-

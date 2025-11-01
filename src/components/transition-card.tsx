@@ -1,17 +1,20 @@
-"use client";
+'use client';
 
-import { ArrowRight } from "lucide-react";
-import { motion as m } from "motion/react";
-import Link from "next/link";
+import { ArrowRight, Play } from 'lucide-react';
+import { motion as m } from 'motion/react';
+import Link from 'next/link';
+import { useRef } from 'react';
 
+import { ThemeToggle, ThemeToggleRef } from '@/components/theme-toggle';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Transition } from "@/data/transitions";
+} from '@/components/ui/card';
+import { Transition } from '@/data/transitions';
 
 interface TransitionCardProps {
   transition: Transition;
@@ -19,6 +22,13 @@ interface TransitionCardProps {
 }
 
 export function TransitionCard({ transition, index }: TransitionCardProps) {
+  const themeToggleRef = useRef<ThemeToggleRef>(null);
+
+  const handlePlayClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    themeToggleRef.current?.triggerTransition();
+  };
   return (
     <Link href={`/transition/${transition.slug}`}>
       <m.div
@@ -26,41 +36,37 @@ export function TransitionCard({ transition, index }: TransitionCardProps) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: index * 0.1 }}
       >
-        <Card className="group relative overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 cursor-pointer">
-          <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-chart-1/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <Card className="group hover:shadow-primary/5 relative cursor-pointer overflow-hidden transition-all duration-300 hover:shadow-lg">
+          <div className="from-primary/5 to-chart-1/5 pointer-events-none absolute inset-0 bg-linear-to-br via-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
           <CardHeader>
             <div className="flex items-start justify-between">
               <div className="space-y-1">
-                <CardTitle className="text-xl group-hover:text-primary transition-colors">
+                <CardTitle className="group-hover:text-primary text-xl transition-colors">
                   {transition.title}
                 </CardTitle>
                 <CardDescription>{transition.description}</CardDescription>
               </div>
-              <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
+              <ArrowRight className="text-muted-foreground group-hover:text-primary h-5 w-5 transition-all group-hover:translate-x-1" />
             </div>
           </CardHeader>
 
-          <CardContent>
-            <div className="relative h-32 rounded-md bg-muted/50 border border-border overflow-hidden">
+          <CardContent className="space-y-3">
+            <div className="bg-muted/50 border-border relative h-32 overflow-hidden rounded-md border">
               <div className="absolute inset-0 flex items-center justify-center">
-                {transition.category === "Theme" ? (
-                  <m.div
-                    className="h-16 w-16 rounded-full bg-gradient-to-br from-chart-1 to-chart-2"
-                    animate={{
-                      scale: [1, 1.2, 1],
-                      rotate: [0, 180, 360],
+                {transition.category === 'Theme' ? (
+                  <div
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
                     }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  />
+                  >
+                    <ThemeToggle ref={themeToggleRef} />
+                  </div>
                 ) : (
                   <div className="flex gap-2">
                     <m.div
-                      className="h-12 w-12 rounded-lg bg-gradient-to-br from-chart-3 to-chart-4"
+                      className="from-chart-3 to-chart-4 h-12 w-12 rounded-lg bg-gradient-to-br"
                       animate={{
                         x: [-20, 20, -20],
                         opacity: [0.5, 1, 0.5],
@@ -68,11 +74,11 @@ export function TransitionCard({ transition, index }: TransitionCardProps) {
                       transition={{
                         duration: 2.5,
                         repeat: Infinity,
-                        ease: "easeInOut",
+                        ease: 'easeInOut',
                       }}
                     />
                     <m.div
-                      className="h-12 w-12 rounded-lg bg-gradient-to-br from-chart-5 to-chart-1"
+                      className="from-chart-5 to-chart-1 h-12 w-12 rounded-lg bg-gradient-to-br"
                       animate={{
                         x: [20, -20, 20],
                         opacity: [1, 0.5, 1],
@@ -80,18 +86,29 @@ export function TransitionCard({ transition, index }: TransitionCardProps) {
                       transition={{
                         duration: 2.5,
                         repeat: Infinity,
-                        ease: "easeInOut",
+                        ease: 'easeInOut',
                       }}
                     />
                   </div>
                 )}
               </div>
-              <div className="absolute bottom-2 right-2 px-2 py-1 rounded-md bg-background/80 backdrop-blur-sm border border-border">
-                <span className="text-xs font-medium text-muted-foreground">
+              <div className="bg-background/80 border-border absolute right-2 bottom-2 rounded-md border px-2 py-1 backdrop-blur-sm">
+                <span className="text-muted-foreground text-xs font-medium">
                   {transition.category}
                 </span>
               </div>
             </div>
+            {transition.category === 'Theme' && (
+              <Button
+                type="button"
+                onClick={handlePlayClick}
+                variant="outline"
+                className="w-full gap-2"
+              >
+                <Play className="h-3 w-3" />
+                Play Transition
+              </Button>
+            )}
           </CardContent>
         </Card>
       </m.div>

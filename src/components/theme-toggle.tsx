@@ -2,11 +2,15 @@
 
 import { motion as m } from 'motion/react';
 import { useTheme } from 'next-themes';
-import { useRef } from 'react';
+import { forwardRef, useImperativeHandle, useRef } from 'react';
 
 import { Button } from '@/components/ui/button';
 
-export function ThemeToggle() {
+export interface ThemeToggleRef {
+  triggerTransition: () => void;
+}
+
+export const ThemeToggle = forwardRef<ThemeToggleRef>((props, ref) => {
   const { theme, setTheme } = useTheme();
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -82,7 +86,11 @@ export function ThemeToggle() {
 
       document.documentElement.classList.add('theme-transition');
 
-      (document as Document & { startViewTransition: (callback: () => void) => void }).startViewTransition(() => {
+      (
+        document as Document & {
+          startViewTransition: (callback: () => void) => void;
+        }
+      ).startViewTransition(() => {
         setTheme(theme === 'dark' ? 'light' : 'dark');
         setTimeout(() => {
           document.documentElement.classList.remove('theme-transition');
@@ -98,9 +106,13 @@ export function ThemeToggle() {
   const moonPath =
     'M70 49.5C70 60.8218 60.8218 70 49.5 70C38.1782 70 29 60.8218 29 49.5C29 38.1782 38.1782 29 49.5 29C39 45 49.5 59.5 70 49.5Z';
 
+  useImperativeHandle(ref, () => ({
+    triggerTransition: toggleTheme,
+  }));
+
   return (
     <Button
-      variant="ghost"
+      variant="outline"
       size="icon"
       onClick={toggleTheme}
       data-theme-toggle
@@ -169,5 +181,6 @@ export function ThemeToggle() {
       </m.svg>
     </Button>
   );
-}
+});
 
+ThemeToggle.displayName = 'ThemeToggle';
