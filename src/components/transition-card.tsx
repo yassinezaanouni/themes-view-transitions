@@ -1,60 +1,94 @@
-"use client";
+'use client';
 
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
-import { ViewTransitionLink } from "@/components/view-transition-link";
-import type { TransitionMeta } from "@/data/transitions";
-import { cn } from "@/lib/utils";
+import { motion as m } from 'motion/react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { ViewTransitionLink } from '@/components/view-transition-link';
+import { Transition } from '@/data/transitions';
+import { ArrowRight } from 'lucide-react';
 
 interface TransitionCardProps {
-  transition: TransitionMeta;
-  Preview: React.ComponentType;
+  transition: Transition;
+  index: number;
 }
 
-export function TransitionCard({ transition, Preview }: TransitionCardProps) {
+export function TransitionCard({ transition, index }: TransitionCardProps) {
   return (
-    <ViewTransitionLink
-      href={`/transitions/${transition.slug}`}
-      className="group focus-visible:outline-none"
-    >
-      <Card
-        className={cn(
-          "card-surface h-full w-full overflow-hidden border border-border/60 bg-[color-mix(in_oklch,var(--color-card)_94%,transparent)] p-0 transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0px_32px_80px_-56px_color-mix(in_oklch,var(--color-ring)_45%,transparent)] focus-visible:ring-2 focus-visible:ring-ring/50",
-        )}
+    <ViewTransitionLink href={`/transition/${transition.slug}`}>
+      <m.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: index * 0.1 }}
       >
-        <div className="relative px-6 pt-6">
-          <Badge variant="outline" className="mb-4">
-            {transition.tags[0]}
-          </Badge>
-          <h3 className="text-xl font-semibold text-[var(--color-card-foreground)]">
-            {transition.title}
-          </h3>
-          <p className="mt-2 text-sm text-[color-mix(in_oklch,var(--color-muted-foreground)_82%,transparent)]">
-            {transition.tagline}
-          </p>
-        </div>
-        <CardContent className="relative mt-6 px-6 pb-6">
-          <div className="relative overflow-hidden rounded-[calc(var(--radius-xl))] border border-border/40 bg-[color-mix(in_oklch,var(--color-card)_92%,transparent)]">
-            <div className="pointer-events-none">
-              <Preview />
+        <Card className="group relative overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1 cursor-pointer">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-chart-1/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          
+          <CardHeader>
+            <div className="flex items-start justify-between">
+              <div className="space-y-1">
+                <CardTitle className="text-xl group-hover:text-primary transition-colors">
+                  {transition.title}
+                </CardTitle>
+                <CardDescription>{transition.description}</CardDescription>
+              </div>
+              <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
             </div>
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 rounded-[calc(var(--radius-xl))] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-              style={{
-                background:
-                  "radial-gradient(circle at 20% -10%, color-mix(in oklch, var(--color-ring) 38%, transparent), transparent 60%)",
-              }}
-            />
-          </div>
-          <div className="mt-6 flex items-center justify-between text-xs uppercase tracking-[0.24em] text-[color-mix(in_oklch,var(--color-muted-foreground)_60%,transparent)]">
-            <span>Tap to explore</span>
-            <span className="text-[color-mix(in_oklch,var(--color-muted-foreground)_45%,transparent)]">
-              View Transition
-            </span>
-          </div>
-        </CardContent>
-      </Card>
+          </CardHeader>
+          
+          <CardContent>
+            <div className="relative h-32 rounded-md bg-muted/50 border border-border overflow-hidden">
+              <div className="absolute inset-0 flex items-center justify-center">
+                {transition.category === 'Theme' ? (
+                  <m.div
+                    className="h-16 w-16 rounded-full bg-gradient-to-br from-chart-1 to-chart-2"
+                    animate={{
+                      scale: [1, 1.2, 1],
+                      rotate: [0, 180, 360],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  />
+                ) : (
+                  <div className="flex gap-2">
+                    <m.div
+                      className="h-12 w-12 rounded-lg bg-gradient-to-br from-chart-3 to-chart-4"
+                      animate={{
+                        x: [-20, 20, -20],
+                        opacity: [0.5, 1, 0.5],
+                      }}
+                      transition={{
+                        duration: 2.5,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                    />
+                    <m.div
+                      className="h-12 w-12 rounded-lg bg-gradient-to-br from-chart-5 to-chart-1"
+                      animate={{
+                        x: [20, -20, 20],
+                        opacity: [1, 0.5, 1],
+                      }}
+                      transition={{
+                        duration: 2.5,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                    />
+                  </div>
+                )}
+              </div>
+              <div className="absolute bottom-2 right-2 px-2 py-1 rounded-md bg-background/80 backdrop-blur-sm border border-border">
+                <span className="text-xs font-medium text-muted-foreground">
+                  {transition.category}
+                </span>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </m.div>
     </ViewTransitionLink>
   );
 }
+

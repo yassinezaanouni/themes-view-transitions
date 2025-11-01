@@ -1,10 +1,11 @@
-"use client";
+"use client"
 
-import * as TabsPrimitive from "@radix-ui/react-tabs";
-import * as React from "react";
-import { cn } from "@/lib/utils";
+import * as React from "react"
+import * as TabsPrimitive from "@radix-ui/react-tabs"
 
-const Tabs = TabsPrimitive.Root;
+import { cn } from "@/lib/utils"
+
+const Tabs = TabsPrimitive.Root
 
 const TabsList = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.List>,
@@ -13,13 +14,13 @@ const TabsList = React.forwardRef<
   <TabsPrimitive.List
     ref={ref}
     className={cn(
-      "inline-flex h-11 items-center justify-center rounded-[calc(var(--radius-lg))] border border-border/60 bg-[color-mix(in_oklch,var(--color-muted)_92%,transparent)] p-1 text-[13px] text-[color-mix(in_oklch,var(--color-muted-foreground)_92%,transparent)]",
-      className,
+      "inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground",
+      className
     )}
     {...props}
   />
-));
-TabsList.displayName = TabsPrimitive.List.displayName;
+))
+TabsList.displayName = TabsPrimitive.List.displayName
 
 const TabsTrigger = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Trigger>,
@@ -28,13 +29,13 @@ const TabsTrigger = React.forwardRef<
   <TabsPrimitive.Trigger
     ref={ref}
     className={cn(
-      "inline-flex min-w-[140px] items-center justify-center whitespace-nowrap rounded-[calc(var(--radius-lg)-4px)] px-4 py-2.5 text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 data-[state=active]:bg-[var(--color-card)] data-[state=active]:text-[var(--color-card-foreground)] data-[state=active]:shadow-[0px_12px_32px_-24px_color-mix(in_oklch,var(--color-ring)_55%,transparent)] data-[state=inactive]:text-[color-mix(in_oklch,var(--color-muted-foreground)_86%,transparent)]",
-      className,
+      "inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm",
+      className
     )}
     {...props}
   />
-));
-TabsTrigger.displayName = TabsPrimitive.Trigger.displayName;
+))
+TabsTrigger.displayName = TabsPrimitive.Trigger.displayName
 
 const TabsContent = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Content>,
@@ -43,12 +44,13 @@ const TabsContent = React.forwardRef<
   <TabsPrimitive.Content
     ref={ref}
     className={cn(
-      "mt-6 rounded-[calc(var(--radius-xl))] border border-border/50 bg-[var(--color-card)] p-6 shadow-[0px_24px_60px_-48px_color-mix(in_oklch,var(--color-ring)_45%,transparent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
-      className,
+      "mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+      className
     )}
     {...props}
   />
-));
-TabsContent.displayName = TabsPrimitive.Content.displayName;
+))
+TabsContent.displayName = TabsPrimitive.Content.displayName
 
-export { Tabs, TabsContent, TabsList, TabsTrigger };
+export { Tabs, TabsList, TabsTrigger, TabsContent }
+

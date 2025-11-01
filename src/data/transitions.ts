@@ -1,7 +1,21 @@
-const decodeRaw = (value: string) =>
-  value.replace(/__BACKTICK__/g, "`").replace(/__DOLLAR__/g, "${");
+export interface Transition {
+  id: string;
+  title: string;
+  slug: string;
+  description: string;
+  category: string;
+  globalCss: string;
+  componentCode: string;
+}
 
-const themeToggleGlobalCode = String.raw`/* Toggle Theme View Transitions */
+export const transitions: Transition[] = [
+  {
+    id: '1',
+    title: 'Circular Reveal Theme',
+    slug: 'theme-toggle',
+    description: 'Circular reveal animation for theme switching',
+    category: 'Theme',
+    globalCss: `/* Toggle Theme View Transitions */
 
 @keyframes theme-mask {
   0% {
@@ -41,9 +55,8 @@ html.theme-transition::view-transition-new(root) {
   .motion-safe-only {
     display: none !important;
   }
-}`;
-
-const themeToggleComponentCode = decodeRaw(String.raw`'use client';
+}`,
+    componentCode: `'use client';
 
 import { motion as m } from 'motion/react';
 import { useTheme } from 'next-themes';
@@ -53,6 +66,7 @@ import { Button } from '@/components/ui/button';
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   const buttonRef = useRef<HTMLButtonElement>(null);
+
   const shineVariant = {
     hidden: {
       opacity: 0,
@@ -70,6 +84,7 @@ export function ThemeToggle() {
       },
     },
   };
+
   const raysVariants = {
     hidden: {
       strokeOpacity: 0,
@@ -85,11 +100,11 @@ export function ThemeToggle() {
       },
     },
   };
+
   const rayVariant = {
     hidden: {
       pathLength: 0,
       opacity: 0,
-      // Start from center of the circle
       scale: 0,
     },
     visible: {
@@ -98,38 +113,35 @@ export function ThemeToggle() {
       scale: 1,
       transition: {
         duration: 0.5,
-        // Customize timing for each property
         pathLength: { duration: 0.3 },
         opacity: { duration: 0.2 },
         scale: { duration: 0.3 },
       },
     },
   };
+
   const toggleTheme = () => {
     if (document.startViewTransition) {
-      // Get the button's position using ref
       const rect = buttonRef.current?.getBoundingClientRect();
       if (rect) {
-        // Calculate position relative to viewport
         const x = (rect.left + rect.right) / 2;
         const y = (rect.top + rect.bottom) / 2;
-        // Set the CSS variables for the animation
+
         document.documentElement.style.setProperty(
           '--x',
-          '__DOLLAR__(x / window.innerWidth) * 100}%',
+          \`\${(x / window.innerWidth) * 100}%\`,
         );
         document.documentElement.style.setProperty(
           '--y',
-          '__DOLLAR__(y / window.innerHeight) * 100}%',
+          \`\${(y / window.innerHeight) * 100}%\`,
         );
       }
-      // Remove page-transition class to avoid conflicts
+
       document.documentElement.classList.remove('page-transition');
-      // Add theme-transition class
       document.documentElement.classList.add('theme-transition');
+
       document.startViewTransition(() => {
         setTheme(theme === 'dark' ? 'light' : 'dark');
-        // Clean up theme-transition class after animation completes
         setTimeout(() => {
           document.documentElement.classList.remove('theme-transition');
         }, 600);
@@ -138,10 +150,12 @@ export function ThemeToggle() {
       setTheme(theme === 'dark' ? 'light' : 'dark');
     }
   };
+
   const sunPath =
     'M70 49.5C70 60.8218 60.8218 70 49.5 70C38.1782 70 29 60.8218 29 49.5C29 38.1782 38.1782 29 49.5 29C60 29 69.5 38 70 49.5Z';
   const moonPath =
     'M70 49.5C70 60.8218 60.8218 70 49.5 70C38.1782 70 29 60.8218 29 49.5C29 38.1782 38.1782 29 49.5 29C39 45 49.5 59.5 70 49.5Z';
+
   return (
     <Button
       variant="ghost"
@@ -212,227 +226,324 @@ export function ThemeToggle() {
       </m.svg>
     </Button>
   );
-}
-`);
-
-const dashboardLiftGlobalCode = String.raw`:root {
-  --panel-surface: color-mix(in oklch, var(--color-card) 92%, transparent);
-  --panel-highlight: color-mix(in oklch, var(--color-chart-4) 22%, transparent);
-}
-
-.metric-tile {
-  view-transition-name: dashboard-tile;
-  transition: transform 320ms var(--ease-standard, cubic-bezier(0.16, 1, 0.3, 1));
-}
-
-.dashboard-grid.reordered .metric-tile {
-  transform: translateY(-12px);
-  box-shadow: 0 32px 80px -48px color-mix(in oklch, var(--color-ring) 30%, transparent);
+}`,
+  },
+  {
+    id: '2',
+    title: 'Fade & Slide Navigation',
+    slug: 'fade-slide',
+    description: 'Smooth fade and slide effect for page navigation',
+    category: 'Navigation',
+    globalCss: `/* Page Transitions */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
 }
 
-.dashboard-grid {
-  display: grid;
-  gap: 1.25rem;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
 }
-`;
 
-const dashboardLiftComponentCode = decodeRaw(String.raw`'use client';
+@keyframes slide-from-right {
+  from {
+    transform: translateX(30px);
+  }
+}
 
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
+@keyframes slide-to-left {
+  to {
+    transform: translateX(-30px);
+  }
+}
 
-export function DashboardLiftDemo() {
-  const [lifted, setLifted] = useState(false);
+html.page-transition::view-transition-old(root) {
+  animation: 90ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
+    300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
+}
 
-  const trigger = () => {
-    const action = () => setLifted((state) => !state);
-    if (document.startViewTransition) {
+html.page-transition::view-transition-new(root) {
+  animation: 210ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
+    300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
+}`,
+    componentCode: `'use client';
+
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+
+export function NavigationLink({ href, children }: { href: string; children: React.ReactNode }) {
+  const router = useRouter();
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+
+    if (typeof document !== 'undefined' && 'startViewTransition' in document) {
       document.documentElement.classList.add('page-transition');
-      const vt = document.startViewTransition(action);
-      vt.finished.finally(() => document.documentElement.classList.remove('page-transition'));
-      return;
+
+      (document as any).startViewTransition(() => {
+        router.push(href);
+        setTimeout(() => {
+          document.documentElement.classList.remove('page-transition');
+        }, 600);
+      });
+    } else {
+      router.push(href);
     }
-    action();
   };
 
   return (
-    <div className="flex flex-col gap-6">
-      <div
-        className={__BACKTICK__dashboard-grid __DOLLAR__lifted ? 'reordered' : ''__BACKTICK__}
-        data-view-state={lifted ? 'reordered' : 'default'}
-      >
-        {["Conversion", "Retention", "Sessions", "Revenue"].map((metric, index) => (
-          <article
-            key={metric}
-            style={{ viewTransitionName: __BACKTICK__dashboard-tile-__DOLLAR__index__BACKTICK__ }}
-            className="metric-tile rounded-[calc(var(--radius-xl))] border border-border/40 bg-[var(--panel-surface)] p-4 backdrop-blur-xl"
-          >
-            <p className="text-xs uppercase tracking-[0.2em] text-[color-mix(in_oklch,var(--color-muted-foreground)_70%,transparent)]">
-              {metric}
-            </p>
-            <p className="mt-4 text-3xl font-semibold text-[var(--color-card-foreground)]">
-              {lifted ? ['68%', '42%', '941', '$36k'][index] : ['64%', '38%', '812', '$29k'][index]}
-            </p>
-            <p className="mt-2 text-sm text-[color-mix(in_oklch,var(--color-muted-foreground)_80%,transparent)]">
-              {lifted ? 'Now Trending' : 'Weekly baseline'}
-            </p>
-          </article>
-        ))}
-      </div>
-      <div className="flex gap-3">
-        <Button onClick={trigger} variant="secondary">
-          Replay Transition
-        </Button>
-      </div>
-    </div>
+    <Link href={href} onClick={handleClick}>
+      {children}
+    </Link>
   );
+}`,
+  },
+  {
+    id: '3',
+    title: 'Vertical Wipe Theme',
+    slug: 'vertical-wipe',
+    description: 'Vertical wipe animation for theme transitions',
+    category: 'Theme',
+    globalCss: `/* Vertical Wipe Theme Transition */
+@keyframes vertical-wipe {
+  0% {
+    clip-path: inset(0 0 100% 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
 }
-`);
 
-const paletteSwitcherGlobalCode = String.raw`.palette-swatch {
-  view-transition-name: palette-swatch;
-  transition: transform 320ms ease, filter 320ms ease;
+html.vertical-wipe-transition::view-transition-old(root),
+html.vertical-wipe-transition::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }
 
-.palette-stage[data-mode='alt'] .palette-swatch {
-  filter: saturate(125%) contrast(110%);
-  transform: translateY(-8px);
+html.vertical-wipe-transition::view-transition-old(root) {
+  z-index: 1;
 }
 
-.palette-stage {
-  display: grid;
-  gap: 0.75rem;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-}
-`;
+html.vertical-wipe-transition::view-transition-new(root) {
+  z-index: 2;
+  animation: vertical-wipe 0.6s ease-in-out forwards;
+}`,
+    componentCode: `'use client';
 
-const paletteSwitcherComponentCode = decodeRaw(String.raw`'use client';
-
-import { useMemo, useState } from 'react';
+import { useTheme } from 'next-themes';
 import { Button } from '@/components/ui/button';
+import { Moon, Sun } from 'lucide-react';
 
-const palettes = {
-  aurora: {
-    label: 'Aurora',
-    swatches: ['#7DD3FC', '#38BDF8', '#2563EB', '#1D4ED8'],
-  },
-  ember: {
-    label: 'Ember',
-    swatches: ['#F59E0B', '#EA580C', '#C2410C', '#E11D48'],
-  },
-};
+export function VerticalWipeToggle() {
+  const { theme, setTheme } = useTheme();
 
-type PaletteKey = keyof typeof palettes;
+  const toggleTheme = () => {
+    if (typeof document !== 'undefined' && 'startViewTransition' in document) {
+      document.documentElement.classList.add('vertical-wipe-transition');
 
-export function PaletteSwitcherDemo() {
-  const [mode, setMode] = useState<PaletteKey>('aurora');
-  const nextMode = useMemo(() => (mode === 'aurora' ? 'ember' : 'aurora'), [mode]);
-
-  const swap = () => {
-    const action = () => setMode((value) => (value === 'aurora' ? 'ember' : 'aurora'));
-    if (document.startViewTransition) {
-      document.documentElement.classList.add('page-transition');
-      const vt = document.startViewTransition(action);
-      vt.finished.finally(() => document.documentElement.classList.remove('page-transition'));
-      return;
+      (document as any).startViewTransition(() => {
+        setTheme(theme === 'dark' ? 'light' : 'dark');
+        setTimeout(() => {
+          document.documentElement.classList.remove('vertical-wipe-transition');
+        }, 600);
+      });
+    } else {
+      setTheme(theme === 'dark' ? 'light' : 'dark');
     }
-    action();
   };
 
   return (
-    <div className="flex flex-col gap-6">
-      <header className="flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-[color-mix(in_oklch,var(--color-muted-foreground)_70%,transparent)]">
-            Active palette
-          </p>
-          <h3 className="text-2xl font-semibold text-[var(--color-card-foreground)]">
-            {palettes[mode].label}
-          </h3>
-        </div>
-        <Button onClick={swap} variant="secondary">
-          Switch to {palettes[nextMode].label}
-        </Button>
-      </header>
-      <div className="palette-stage" data-mode={mode === 'aurora' ? 'base' : 'alt'}>
-        {palettes[mode].swatches.map((swatch, index) => (
-          <div
-            key={swatch}
-            style={{
-              viewTransitionName: __BACKTICK__palette-swatch-__DOLLAR__index__BACKTICK__,
-              background: swatch,
-            }}
-            className="palette-swatch rounded-[calc(var(--radius-lg))] border border-white/10 p-4 text-lg font-medium text-white drop-shadow-lg"
-          >
-            {swatch}
-          </div>
-        ))}
-      </div>
-    </div>
+    <Button onClick={toggleTheme} variant="outline" size="icon">
+      {theme === 'dark' ? (
+        <Sun className="h-5 w-5" />
+      ) : (
+        <Moon className="h-5 w-5" />
+      )}
+    </Button>
   );
+}`,
+  },
+  {
+    id: '4',
+    title: 'Scale & Fade',
+    slug: 'scale-fade',
+    description: 'Scale and fade effect for smooth page transitions',
+    category: 'Navigation',
+    globalCss: `/* Scale & Fade Transition */
+@keyframes scale-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
 }
-`);
 
-export interface TransitionMeta {
-  slug: string;
-  title: string;
-  tagline: string;
-  summary: string;
-  tags: string[];
-  accent: string;
-  previewVariant: "mask" | "cascade" | "switcher";
-  code: {
-    global: string;
-    component: string;
+@keyframes scale-fade-out {
+  to {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+}
+
+html.scale-fade-transition::view-transition-old(root) {
+  animation: 300ms cubic-bezier(0.4, 0, 1, 1) both scale-fade-out;
+}
+
+html.scale-fade-transition::view-transition-new(root) {
+  animation: 300ms cubic-bezier(0, 0, 0.2, 1) both scale-fade-in;
+}`,
+    componentCode: `'use client';
+
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+
+export function ScaleFadeLink({ href, children }: { href: string; children: React.ReactNode }) {
+  const router = useRouter();
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+
+    if (typeof document !== 'undefined' && 'startViewTransition' in document) {
+      document.documentElement.classList.add('scale-fade-transition');
+
+      (document as any).startViewTransition(() => {
+        router.push(href);
+        setTimeout(() => {
+          document.documentElement.classList.remove('scale-fade-transition');
+        }, 600);
+      });
+    } else {
+      router.push(href);
+    }
   };
+
+  return (
+    <Link href={href} onClick={handleClick}>
+      {children}
+    </Link>
+  );
+}`,
+  },
+  {
+    id: '5',
+    title: 'Diagonal Slide Theme',
+    slug: 'diagonal-slide',
+    description: 'Diagonal sliding animation for theme changes',
+    category: 'Theme',
+    globalCss: `/* Diagonal Slide Theme Transition */
+@keyframes diagonal-slide {
+  0% {
+    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  }
+  100% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
 }
 
-export const transitions: TransitionMeta[] = [
-  {
-    slug: "theme-toggle",
-    title: "Radial Mask Theme Toggle",
-    tagline: "Use the View Transition API to reveal dark mode with a precise mask tied to the toggle location.",
-    summary:
-      "A theme switcher that captures the toggle position, expands a radial mask, and coordinates View Transition layers for a buttery swap between light and dark semantic tokens.",
-    tags: ["Themes", "Masking", "Accessibility"],
-    accent: "var(--color-chart-1)",
-    previewVariant: "mask",
-    code: {
-      global: themeToggleGlobalCode,
-      component: themeToggleComponentCode,
-    },
+html.diagonal-slide-transition::view-transition-old(root),
+html.diagonal-slide-transition::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+html.diagonal-slide-transition::view-transition-old(root) {
+  z-index: 1;
+}
+
+html.diagonal-slide-transition::view-transition-new(root) {
+  z-index: 2;
+  animation: diagonal-slide 0.5s ease-in-out forwards;
+}`,
+    componentCode: `'use client';
+
+import { useTheme } from 'next-themes';
+import { Button } from '@/components/ui/button';
+
+export function DiagonalSlideToggle() {
+  const { theme, setTheme } = useTheme();
+
+  const toggleTheme = () => {
+    if (typeof document !== 'undefined' && 'startViewTransition' in document) {
+      document.documentElement.classList.add('diagonal-slide-transition');
+
+      (document as any).startViewTransition(() => {
+        setTheme(theme === 'dark' ? 'light' : 'dark');
+        setTimeout(() => {
+          document.documentElement.classList.remove('diagonal-slide-transition');
+        }, 500);
+      });
+    } else {
+      setTheme(theme === 'dark' ? 'light' : 'dark');
+    }
+  };
+
+  return (
+    <Button onClick={toggleTheme} variant="outline">
+      Toggle Theme
+    </Button>
+  );
+}`,
   },
   {
-    slug: "dashboard-lift",
-    title: "Dashboard Panel Lift",
-    tagline: "Slide, blur, and lift cards while view transitions keep layers crisp and anchored.",
-    summary:
-      "A glassmorphism dashboard reorganizes itself with staggered card motion. View transition names keep the key metrics locked in place while backgrounds glide behind them.",
-    tags: ["Dashboards", "Cards", "Micro-interactions"],
-    accent: "var(--color-chart-4)",
-    previewVariant: "cascade",
-    code: {
-      global: dashboardLiftGlobalCode,
-      component: dashboardLiftComponentCode,
-    },
-  },
-  {
-    slug: "palette-switcher",
-    title: "Palette Cascade Switcher",
-    tagline: "Blend gradients and typography with a cascading color palette swap.",
-    summary:
-      "A hero palette morphs between brand presets, cascading gradients across swatches with view transition-name hooks to keep continuity across frames.",
-    tags: ["Brand", "Typography", "Gradients"],
-    accent: "var(--color-chart-2)",
-    previewVariant: "switcher",
-    code: {
-      global: paletteSwitcherGlobalCode,
-      component: paletteSwitcherComponentCode,
-    },
+    id: '6',
+    title: 'Rotate & Zoom',
+    slug: 'rotate-zoom',
+    description: 'Rotating zoom effect for dramatic page transitions',
+    category: 'Navigation',
+    globalCss: `/* Rotate & Zoom Transition */
+@keyframes rotate-zoom-in {
+  from {
+    opacity: 0;
+    transform: scale(0.8) rotate(-5deg);
+  }
+}
+
+@keyframes rotate-zoom-out {
+  to {
+    opacity: 0;
+    transform: scale(1.2) rotate(5deg);
+  }
+}
+
+html.rotate-zoom-transition::view-transition-old(root) {
+  animation: 400ms cubic-bezier(0.4, 0, 1, 1) both rotate-zoom-out;
+}
+
+html.rotate-zoom-transition::view-transition-new(root) {
+  animation: 400ms cubic-bezier(0, 0, 0.2, 1) both rotate-zoom-in;
+}`,
+    componentCode: `'use client';
+
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+
+export function RotateZoomLink({ href, children }: { href: string; children: React.ReactNode }) {
+  const router = useRouter();
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+
+    if (typeof document !== 'undefined' && 'startViewTransition' in document) {
+      document.documentElement.classList.add('rotate-zoom-transition');
+
+      (document as any).startViewTransition(() => {
+        router.push(href);
+        setTimeout(() => {
+          document.documentElement.classList.remove('rotate-zoom-transition');
+        }, 800);
+      });
+    } else {
+      router.push(href);
+    }
+  };
+
+  return (
+    <Link href={href} onClick={handleClick}>
+      {children}
+    </Link>
+  );
+}`,
   },
 ];
 
-export function getTransitionBySlug(slug: string) {
-  return transitions.find((transition) => transition.slug === slug);
-}

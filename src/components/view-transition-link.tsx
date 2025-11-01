@@ -1,78 +1,42 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useCallback } from "react";
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { ComponentProps } from 'react';
 
-export interface ViewTransitionLinkProps
-  extends Omit<React.ComponentProps<typeof Link>, "href"> {
+interface ViewTransitionLinkProps extends ComponentProps<typeof Link> {
   href: string;
-  withTimelineClassName?: string;
-  animate?: boolean;
 }
 
 export function ViewTransitionLink({
   href,
   children,
-  replace,
-  prefetch,
-  onClick,
-  withTimelineClassName = "page-transition",
-  animate = true,
   ...props
 }: ViewTransitionLinkProps) {
   const router = useRouter();
 
-  const handleNavigation = useCallback(
-    (event: React.MouseEvent<HTMLAnchorElement>) => {
-      if (onClick) {
-        onClick(event);
-      }
-      if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
-        return;
-      }
-      event.preventDefault();
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
 
-      const go = () => {
-        if (replace) {
-          router.replace(href);
-        } else {
-          router.push(href);
-        }
-      };
+    if (typeof document !== 'undefined' && 'startViewTransition' in document) {
+      document.documentElement.classList.remove('theme-transition');
+      document.documentElement.classList.add('page-transition');
 
-      if (!animate || typeof document.startViewTransition !== "function") {
-        go();
-        if (animate) {
-          document.documentElement.classList.remove(withTimelineClassName);
-        }
-        return;
-      }
-
-      document.documentElement.classList.add(withTimelineClassName);
-
-      const transition = document.startViewTransition(() => {
-        go();
+      (document as any).startViewTransition(() => {
+        router.push(href);
+        setTimeout(() => {
+          document.documentElement.classList.remove('page-transition');
+        }, 600);
       });
-
-      transition.finished
-        .catch(() => void 0)
-        .finally(() => {
-          document.documentElement.classList.remove(withTimelineClassName);
-        });
-    },
-    [animate, href, onClick, replace, router, withTimelineClassName],
-  );
+    } else {
+      router.push(href);
+    }
+  };
 
   return (
-    <Link
-      href={href}
-      onClick={handleNavigation}
-      prefetch={prefetch}
-      replace={replace}
-      {...props}
-    >
+    <Link href={href} onClick={handleClick} {...props}>
       {children}
     </Link>
   );
 }
+
