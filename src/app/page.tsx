@@ -39,7 +39,7 @@ export default function Home() {
       title: 'Geometric Shapes',
       description:
         'Circular, polygonal, and geometric patterns that create structured, modern transitions',
-      icon: <Shapes className="h-5 w-5" />,
+      icon: <Shapes className="size-8" />,
       color: 'text-blue-600 dark:text-blue-400',
     },
     {
@@ -47,7 +47,7 @@ export default function Home() {
       title: 'Directional Wipes',
       description:
         'Clean, directional transitions that sweep across the screen in various patterns',
-      icon: <Move className="h-5 w-5" />,
+      icon: <Move className="size-8" />,
       color: 'text-purple-600 dark:text-purple-400',
     },
     {
@@ -55,7 +55,7 @@ export default function Home() {
       title: '3D Effects',
       description:
         'Immersive transitions with depth, perspective, and three-dimensional movement',
-      icon: <Box className="h-5 w-5" />,
+      icon: <Box className="size-8" />,
       color: 'text-rose-600 dark:text-rose-400',
     },
     {
@@ -63,7 +63,7 @@ export default function Home() {
       title: 'Organic & Fluid',
       description:
         'Natural, flowing transitions with smooth, organic motion and effects',
-      icon: <Droplets className="h-5 w-5" />,
+      icon: <Droplets className="size-8" />,
       color: 'text-teal-600 dark:text-teal-400',
     },
     {
@@ -71,7 +71,7 @@ export default function Home() {
       title: 'Fun & Playful',
       description:
         'Whimsical, animated transitions that add personality and joy to your experience',
-      icon: <PartyPopper className="h-5 w-5" />,
+      icon: <PartyPopper className="size-8" />,
       color: 'text-pink-600 dark:text-pink-400',
     },
   ];
@@ -96,7 +96,7 @@ export default function Home() {
           transitions={featuredTransitions}
           title="Featured Transitions"
           description="Our handpicked selection of the most impressive and popular transitions"
-          icon={<Sparkles className="h-5 w-5" />}
+          icon={<Sparkles className="size-8" />}
           color="text-amber-600 dark:text-amber-400"
         />
       )}

@@ -1,4 +1,6 @@
 import { CategoryType, Transition } from '@/data/transitions';
+import { cn } from '@/lib/utils';
+
 import { TransitionCard } from './transition-card';
 
 interface CategorySectionProps {
@@ -24,7 +26,7 @@ export function CategorySection({
     <section id={`category-${category}`} className="scroll-mt-8">
       <header className="mb-8 space-y-3">
         <div className="flex items-center gap-3">
-          <div className={color}>{icon}</div>
+          <div className={cn(color)}>{icon}</div>
           <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
             {title}
           </h2>
@@ -33,7 +35,7 @@ export function CategorySection({
           </div>
         </div>
         {description && (
-          <p className="text-muted-foreground text-base md:text-lg ml-11 max-w-3xl">
+          <p className="text-muted-foreground ml-11 max-w-3xl text-base md:text-lg">
             {description}
           </p>
         )}
@@ -41,7 +43,7 @@ export function CategorySection({
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {transitions.map((transition, index) => (
           <TransitionCard
-            key={transition.id}
+            key={transition.slug}
             transition={transition}
             index={index}
           />
