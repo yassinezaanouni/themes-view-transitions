@@ -45,11 +45,8 @@ export function CodeBlock({ code, language }: CodeBlockProps) {
             style={theme === 'dark' ? oneDark : oneLight}
             customStyle={{
               margin: 0,
-              padding: '1.5rem',
+              padding: '1rem',
               fontSize: '0.875rem',
-              lineHeight: '1.5',
-              background:
-                theme === 'dark' ? 'oklch(0.205 0 0)' : 'oklch(0.985 0 0)',
             }}
             showLineNumbers
           >

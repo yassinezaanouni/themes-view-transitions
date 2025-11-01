@@ -33,9 +33,7 @@ export default async function TransitionPage({ params }: TransitionPageProps) {
   let componentCode = await readFile(componentFilePath, 'utf-8');
 
   // Replace the transitionType prop with the specific transition slug
-  const transitionClass = transition.slug === 'theme-toggle'
-    ? 'theme-transition'
-    : `${transition.slug}-transition`;
+  const transitionClass = `${transition.slug}-transition`;
 
   componentCode = componentCode
     // Remove TransitionType import
@@ -57,7 +55,7 @@ export default async function TransitionPage({ params }: TransitionPageProps) {
     .replace(/\btransitionType\b/g, `'${transition.slug}'`)
     // Replace the entire transition class mapping logic with hardcoded value
     .replace(
-      /\/\/ Map transition type to CSS class\n\s*const transitionClass\s*=[^;]+;/,
+      /\/\/ Map transition type to CSS class\s*\n\s*const transitionClass\s*=[\s\S]*?;/,
       `// Map transition type to CSS class\n      const transitionClass = '${transitionClass}';`
     );
 

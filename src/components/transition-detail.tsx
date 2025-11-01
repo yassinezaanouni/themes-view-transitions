@@ -48,14 +48,9 @@ export function TransitionDetail({
       {/* Header */}
       <div className="space-y-2">
         <div className="flex items-start justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <h1 className="text-4xl font-bold tracking-tight">
-              {transition.title}
-            </h1>
-            <span className="bg-primary/10 text-primary rounded-md px-2 py-1 text-xs font-medium">
-              Theme
-            </span>
-          </div>
+          <h1 className="text-4xl font-bold tracking-tight">
+            {transition.title}
+          </h1>
           <Button asChild variant="outline">
             <a
               href="https://developer.chrome.com/docs/web-platform/view-transitions/"

@@ -1,5 +1,5 @@
 export type TransitionType =
-  | 'theme-toggle'
+  | 'circular-reveal'
   | 'vertical-wipe'
   | 'circle-with-blur'
   | 'circle-blur-top-left'
@@ -55,8 +55,8 @@ export interface Transition {
 
 export const transitions: Transition[] = [
   {
-    title: 'Circular Reveal Theme',
-    slug: 'theme-toggle',
+    title: 'Circular Reveal',
+    slug: 'circular-reveal',
     description: 'Circular reveal animation for theme switching',
     cssFile: 'circular-reveal.css',
     componentFile: 'theme-toggle.tsx',

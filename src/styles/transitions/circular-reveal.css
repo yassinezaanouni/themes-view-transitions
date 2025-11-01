@@ -1,6 +1,6 @@
-/* Toggle Theme View Transitions */
+/* Circular Reveal Transition */
 
-@keyframes theme-mask {
+@keyframes circular-reveal {
   0% {
     clip-path: circle(0% at var(--x, 50%) var(--y, 50%));
   }
@@ -10,17 +10,17 @@
   }
 }
 
-html.theme-transition::view-transition-old(root),
-html.theme-transition::view-transition-new(root) {
+html.circular-reveal-transition::view-transition-old(root),
+html.circular-reveal-transition::view-transition-new(root) {
   animation: none;
   mix-blend-mode: normal;
 }
 
-html.theme-transition::view-transition-old(root) {
+html.circular-reveal-transition::view-transition-old(root) {
   z-index: 1;
 }
 
-html.theme-transition::view-transition-new(root) {
+html.circular-reveal-transition::view-transition-new(root) {
   z-index: 2;
-  animation: theme-mask 0.5s ease-in forwards;
+  animation: circular-reveal 0.5s ease-in forwards;
 }

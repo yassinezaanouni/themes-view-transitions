@@ -16,7 +16,7 @@ interface ThemeToggleProps {
 }
 
 export const ThemeToggle = forwardRef<ThemeToggleRef, ThemeToggleProps>(
-  ({ transitionType = 'theme-toggle' }, ref) => {
+  ({ transitionType = 'circular-reveal' }, ref) => {
     const { theme, setTheme } = useTheme();
     const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -48,10 +48,7 @@ export const ThemeToggle = forwardRef<ThemeToggleRef, ThemeToggleProps>(
       }
 
       // Map transition type to CSS class
-      const transitionClass =
-        transitionType === 'theme-toggle'
-          ? 'theme-transition'
-          : `${transitionType}-transition`;
+      const transitionClass = `${transitionType}-transition`;
 
       document.documentElement.classList.add(transitionClass);
 
