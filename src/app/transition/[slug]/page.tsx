@@ -1,4 +1,6 @@
 import { notFound } from 'next/navigation';
+import { readFile } from 'fs/promises';
+import { join } from 'path';
 
 import { TransitionDetail } from '@/components/transition-detail';
 import { transitions } from '@/data/transitions';
@@ -23,6 +25,13 @@ export default async function TransitionPage({ params }: TransitionPageProps) {
     notFound();
   }
 
-  return <TransitionDetail transition={transition} />;
+  // Read CSS and component files from filesystem
+  const cssFilePath = join(process.cwd(), 'src', 'styles', 'transitions', transition.cssFile);
+  const componentFilePath = join(process.cwd(), 'src', 'components', transition.componentFile);
+  
+  const globalCss = await readFile(cssFilePath, 'utf-8');
+  const componentCode = await readFile(componentFilePath, 'utf-8');
+
+  return <TransitionDetail transition={transition} globalCss={globalCss} componentCode={componentCode} />;
 }
 

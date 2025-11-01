@@ -14,9 +14,11 @@ import { Transition } from '@/data/transitions';
 
 interface TransitionDetailProps {
   transition: Transition;
+  globalCss: string;
+  componentCode: string;
 }
 
-export function TransitionDetail({ transition }: TransitionDetailProps) {
+export function TransitionDetail({ transition, globalCss, componentCode }: TransitionDetailProps) {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const replayTransition = () => {
@@ -147,10 +149,10 @@ export function TransitionDetail({ transition }: TransitionDetailProps) {
                   <TabsTrigger value="component">Component</TabsTrigger>
                 </TabsList>
                 <TabsContent value="css" className="mt-4">
-                  <CodeBlock code={transition.globalCss} language="css" />
+                  <CodeBlock code={globalCss} language="css" />
                 </TabsContent>
                 <TabsContent value="component" className="mt-4">
-                  <CodeBlock code={transition.componentCode} language="tsx" />
+                  <CodeBlock code={componentCode} language="tsx" />
                 </TabsContent>
               </Tabs>
             </CardContent>
