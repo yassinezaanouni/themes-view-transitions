@@ -26,8 +26,19 @@ export default async function TransitionPage({ params }: TransitionPageProps) {
   }
 
   // Read CSS and component files from filesystem
-  const cssFilePath = join(process.cwd(), 'src', 'styles', 'transitions', transition.cssFile);
-  const componentFilePath = join(process.cwd(), 'src', 'components', transition.componentFile);
+  const cssFilePath = join(
+    process.cwd(),
+    'src',
+    'styles',
+    'transitions',
+    transition.cssFile,
+  );
+  const componentFilePath = join(
+    process.cwd(),
+    'src',
+    'components',
+    transition.componentFile,
+  );
 
   const transitionCss = await readFile(cssFilePath, 'utf-8');
   let componentCode = await readFile(componentFilePath, 'utf-8');
@@ -40,6 +51,19 @@ export default async function TransitionPage({ params }: TransitionPageProps) {
     .replace(/import \{ usePostHog \} from 'posthog-js\/react';\n/g, '')
     // Remove TransitionType import
     .replace(/import \{ TransitionType \} from '@\/data\/transitions';\n/g, '')
+    // Remove forwardRef and useImperativeHandle from React imports
+    .replace(
+      /import \{ ([^}]*), forwardRef, useImperativeHandle, ([^}]*) \} from 'react';/,
+      "import { $1, $2 } from 'react';",
+    )
+    .replace(
+      /import \{ forwardRef, useImperativeHandle, ([^}]*) \} from 'react';/,
+      "import { $1 } from 'react';",
+    )
+    .replace(
+      /import \{ ([^}]*), forwardRef, useImperativeHandle \} from 'react';/,
+      "import { $1 } from 'react';",
+    )
     // Remove ThemeToggleRef interface
     .replace(/export interface ThemeToggleRef \{[^}]+\}\n\n/g, '')
     // Remove ThemeToggleProps interface
@@ -47,22 +71,25 @@ export default async function TransitionPage({ params }: TransitionPageProps) {
     // Remove forwardRef wrapper and convert to normal component
     .replace(
       /export const ThemeToggle = forwardRef<ThemeToggleRef, ThemeToggleProps>\(\s*\([^)]*\)\s*=>\s*\{/,
-      'export const ThemeToggle = () => {'
+      'export const ThemeToggle = () => {',
     )
     // Remove the closing forwardRef
     .replace(/\},\n\);\n\nThemeToggle\.displayName = 'ThemeToggle';/, '};')
     // Remove useImperativeHandle hook
     .replace(/\s*useImperativeHandle\([\s\S]*?\}\)\);?\s*/g, '')
     // Remove PostHog hook declaration
-    .replace(/\s*const posthog = usePostHog\(\);?\s*/g, '')
+    .replace(/\s*const posthog = usePostHog\(\);?\s*/g, '\n\n')
     // Remove PostHog tracking comment and capture call
-    .replace(/\s*\/\/ Track theme toggle event[\s\S]*?posthog\?\.capture\([^;]*\);?\s*/g, '\n')
+    .replace(
+      /\s*\/\/ Track theme toggle event[\s\S]*?posthog\?\.capture\([^;]*\);?\s*/g,
+      '\n',
+    )
     // Replace transitionType variable usage with hardcoded value
     .replace(/\btransitionType\b/g, `'${transition.slug}'`)
     // Replace the entire transition class mapping logic with hardcoded value
     .replace(
       /\/\/ Map transition type to CSS class\s*\n\s*const transitionClass\s*=[\s\S]*?;/,
-      `// Map transition type to CSS class\n      const transitionClass = '${transitionClass}';`
+      `// Map transition type to CSS class\n      const transitionClass = '${transitionClass}';`,
     );
 
   // Check if the CSS uses expo timing functions
@@ -110,6 +137,11 @@ ${timingFunctionsNeeded.join('\n')}
     globalCss = timingFunctions + transitionCss;
   }
 
-  return <TransitionDetail transition={transition} globalCss={globalCss} componentCode={componentCode} />;
+  return (
+    <TransitionDetail
+      transition={transition}
+      globalCss={globalCss}
+      componentCode={componentCode}
+    />
+  );
 }
-
