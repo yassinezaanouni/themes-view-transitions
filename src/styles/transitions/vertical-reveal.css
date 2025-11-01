@@ -1,0 +1,30 @@
+/* Vertical Reveal Theme Transition */
+
+html.vertical-reveal-transition::view-transition-group(root) {
+  animation-timing-function: var(--expo-out);
+}
+
+html.vertical-reveal-transition::view-transition-new(root) {
+  animation: reveal-vertical 1s var(--expo-out);
+  clip-path: inset(0 0 0 0);
+  z-index: 2;
+}
+
+html.vertical-reveal-transition::view-transition-old(root) {
+  z-index: -1;
+  animation: none;
+}
+
+html.vertical-reveal-transition.dark::view-transition-new(root) {
+  --from: 0 0 100% 0;
+}
+
+html.vertical-reveal-transition:not(.dark)::view-transition-new(root) {
+  --from: 100% 0 0 0;
+}
+
+@keyframes reveal-vertical {
+  from {
+    clip-path: inset(var(--from, 100% 0 0 0));
+  }
+}

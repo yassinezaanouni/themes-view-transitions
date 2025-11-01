@@ -16,7 +16,10 @@ export type TransitionType =
   | 'zoom-blur'
   | 'pixelate-dissolve'
   | 'wave-reveal'
-  | 'gradient-wipe';
+  | 'gradient-wipe'
+  | 'diagonal-wipe'
+  | 'flip-3d'
+  | 'columns-slide';
 
 export interface Transition {
   id: string;
@@ -170,6 +173,30 @@ export const transitions: Transition[] = [
     slug: 'gradient-wipe',
     description: 'Smooth gradient-based sweep transition',
     cssFile: 'gradient-wipe.css',
+    componentFile: 'theme-toggle.tsx',
+  },
+  {
+    id: '28',
+    title: 'Diagonal Wipe',
+    slug: 'diagonal-wipe',
+    description: 'Dynamic diagonal sweep from corner to corner',
+    cssFile: 'diagonal-wipe.css',
+    componentFile: 'theme-toggle.tsx',
+  },
+  {
+    id: '30',
+    title: 'Flip 3D',
+    slug: 'flip-3d',
+    description: '3D card flip with perspective and depth',
+    cssFile: 'flip-3d.css',
+    componentFile: 'theme-toggle.tsx',
+  },
+  {
+    id: '32',
+    title: 'Columns Slide',
+    slug: 'columns-slide',
+    description: 'Staggered columns sliding down with wave effect',
+    cssFile: 'columns-slide.css',
     componentFile: 'theme-toggle.tsx',
   },
 ];

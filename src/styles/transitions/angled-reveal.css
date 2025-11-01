@@ -1,0 +1,21 @@
+/* Angled Reveal Theme Transition */
+
+html.angled-reveal-transition::view-transition-group(root) {
+  animation-timing-function: var(--expo-out);
+}
+
+html.angled-reveal-transition::view-transition-old(root) {
+  animation: none;
+  z-index: -1;
+}
+
+html.angled-reveal-transition::view-transition-new(root) {
+  animation: unclip 1s var(--expo-out);
+  clip-path: polygon(-100vmax 100%, 100% 100%, 100% -100vmax);
+}
+
+@keyframes unclip {
+  0% {
+    clip-path: polygon(100% 100%, 100% 100%, 100% 100%);
+  }
+}
