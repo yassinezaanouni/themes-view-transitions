@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: TransitionPageProps) {
   }
   return {
     title: `${transition.title} — View Transition Playground`,
-    description: transition.summary,
+    description: transition.description,
   };
 }
 
@@ -60,14 +60,14 @@ export default async function TransitionPage({ params }: TransitionPageProps) {
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl space-y-5">
               <Badge variant="solid" className="uppercase tracking-[0.28em]">
-                {transition.tags.join(" · ")}
+                {transition.category}
               </Badge>
               <div className="space-y-4">
                 <h1 className="text-5xl font-semibold leading-tight text-[var(--color-foreground)]">
                   {transition.title}
                 </h1>
                 <p className="text-lg text-[color-mix(in_oklch,var(--color-muted-foreground)_82%,transparent)]">
-                  {transition.summary}
+                  {transition.description}
                 </p>
               </div>
             </div>
@@ -114,10 +114,10 @@ export default async function TransitionPage({ params }: TransitionPageProps) {
                 <TabsTrigger value="component">component.tsx</TabsTrigger>
               </TabsList>
               <TabsContent value="global">
-                <CodeBlock code={transition.code.global} language="css" filename="global.css" />
+                <CodeBlock code={transition.globalCss} language="css" filename="global.css" />
               </TabsContent>
               <TabsContent value="component">
-                <CodeBlock code={transition.code.component} language="tsx" filename="component.tsx" />
+                <CodeBlock code={transition.componentCode} language="tsx" filename="component.tsx" />
               </TabsContent>
             </Tabs>
             <div className="rounded-[calc(var(--radius-xl))] border border-border/60 bg-[color-mix(in_oklch,var(--color-card)_94%,transparent)] p-6 text-sm text-[color-mix(in_oklch,var(--color-muted-foreground)_78%,transparent)] shadow-[0px_24px_60px_-48px_color-mix(in_oklch,var(--color-ring)_35%,transparent)]">

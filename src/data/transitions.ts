@@ -547,3 +547,7 @@ export function RotateZoomLink({ href, children }: { href: string; children: Rea
   },
 ];
 
+export function getTransitionBySlug(slug: string): Transition | undefined {
+  return transitions.find((transition) => transition.slug === slug);
+}
+

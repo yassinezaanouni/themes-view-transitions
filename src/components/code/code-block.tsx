@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import Highlight, { defaultProps } from "prism-react-renderer";
+import { Highlight } from "prism-react-renderer";
 import type { Language, PrismTheme } from "prism-react-renderer";
 import { useCallback, useMemo, useState } from "react";
 
@@ -107,7 +107,7 @@ export function CodeBlock({ code, language = "tsx", className, filename }: CodeB
         </Button>
       </div>
       <div className="relative overflow-auto">
-        <Highlight {...defaultProps} code={snippet} language={language} theme={semanticTheme}>
+        <Highlight code={snippet} language={language} theme={semanticTheme}>
           {({ className: innerClass, style, tokens, getLineProps, getTokenProps }) => (
             <pre
               className={cn(
