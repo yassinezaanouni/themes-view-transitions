@@ -1,6 +1,7 @@
 'use client';
 
 import { useTheme } from 'next-themes';
+import { startTransition, useEffect, useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import {
   oneDark,
@@ -16,26 +17,45 @@ interface CodeBlockProps {
 
 export function CodeBlock({ code, language }: CodeBlockProps) {
   const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    startTransition(() => {
+      setMounted(true);
+    });
+  }, []);
 
   return (
     <div className="group relative">
       <CopyButton text={code} className="absolute top-2 right-2 z-10" />
       <div className="border-border overflow-hidden rounded-lg border">
-        <SyntaxHighlighter
-          language={language}
-          style={theme === 'dark' ? oneDark : oneLight}
-          customStyle={{
-            margin: 0,
-            padding: '1.5rem',
-            fontSize: '0.875rem',
-            lineHeight: '1.5',
-            background:
-              theme === 'dark' ? 'oklch(0.205 0 0)' : 'oklch(0.985 0 0)',
-          }}
-          showLineNumbers
-        >
-          {code}
-        </SyntaxHighlighter>
+        {!mounted ? (
+          // Loading skeleton that works in both themes
+          <div className="bg-muted animate-pulse space-y-3 p-6 lg:min-h-[800px]">
+            {Array.from({ length: 20 }).map((_, i) => (
+              <div
+                key={i}
+                className={`bg-muted-foreground/20 h-4 w-${['3/4', 'full', '5/6', '4/5', 'full', '2/3', '4/5', '3/4', 'full', '2/3'][i % 10]} rounded`}
+              />
+            ))}
+          </div>
+        ) : (
+          <SyntaxHighlighter
+            language={language}
+            style={theme === 'dark' ? oneDark : oneLight}
+            customStyle={{
+              margin: 0,
+              padding: '1.5rem',
+              fontSize: '0.875rem',
+              lineHeight: '1.5',
+              background:
+                theme === 'dark' ? 'oklch(0.205 0 0)' : 'oklch(0.985 0 0)',
+            }}
+            showLineNumbers
+          >
+            {code}
+          </SyntaxHighlighter>
+        )}
       </div>
     </div>
   );
