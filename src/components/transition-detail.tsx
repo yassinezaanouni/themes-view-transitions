@@ -37,20 +37,19 @@ export function TransitionDetail({
 
   return (
     <div className="space-y-8">
-      {/* Back Button */}
-      <Link href="/">
-        <Button variant="ghost" className="gap-2">
-          <ArrowLeft className="h-4 w-4" />
-          Back to all transitions
-        </Button>
-      </Link>
-
       {/* Header */}
       <div className="space-y-2">
         <div className="flex items-start justify-between gap-4">
-          <h1 className="text-4xl font-bold tracking-tight">
-            {transition.title}
-          </h1>
+          <div className="flex items-center gap-3">
+            <Link href="/">
+              <Button variant="ghost" size="icon">
+                <ArrowLeft className="h-4 w-4" />
+              </Button>
+            </Link>
+            <h1 className="text-4xl font-bold tracking-tight">
+              {transition.title}
+            </h1>
+          </div>
           <Button asChild variant="outline">
             <a
               href="https://developer.chrome.com/docs/web-platform/view-transitions/"

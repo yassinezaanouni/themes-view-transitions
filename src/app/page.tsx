@@ -79,14 +79,42 @@ export default function Home() {
   return (
     <div className="space-y-20">
       {/* Header */}
-      <header className="space-y-4 border-b pb-8">
-        <h1 className="text-5xl font-bold tracking-tight md:text-6xl">
-          Transition Gallery
-        </h1>
-        <p className="text-muted-foreground max-w-2xl text-lg md:text-xl">
-          Explore {transitions.length} beautiful theme transitions powered by
-          the View Transition API
-        </p>
+      <header className="relative mx-auto max-w-4xl space-y-6 pb-12 text-center">
+        <div className="from-primary/5 to-chart-1/5 pointer-events-none absolute inset-0 -z-10 rounded-3xl bg-linear-to-br via-transparent" />
+
+        <div className="relative space-y-4">
+          <div className="space-y-3">
+            <h1 className="text-6xl font-bold tracking-tight md:text-7xl lg:text-8xl">
+              <span className="from-foreground via-foreground to-muted-foreground bg-linear-to-br bg-clip-text text-transparent">
+                Transition{' '}
+              </span>
+              <span className="from-primary to-chart-1 bg-linear-to-tr bg-clip-text text-transparent">
+                Gallery
+              </span>
+            </h1>
+            <a
+              href="https://x.com/YassineZaanouni"
+              target="_blank"
+              rel="noreferrer"
+              className="text-muted-foreground hover:text-foreground inline-flex items-center gap-1 text-base transition-colors"
+            >
+              <span className="text-foreground/60">by</span>
+              <span className="font-medium">@yassinezaanouni</span>
+            </a>
+          </div>
+          <p className="text-muted-foreground mx-auto max-w-2xl text-xl font-light md:text-2xl">
+            Explore {transitions.length} beautiful theme transitions powered by
+            the <br className="hidden md:block" />
+            <a
+              href="https://developer.chrome.com/docs/web-platform/view-transitions/"
+              target="_blank"
+              rel="noreferrer"
+              className="text-foreground font-medium hover:underline"
+            >
+              View Transition API
+            </a>
+          </p>
+        </div>
       </header>
 
       {/* Featured Section */}

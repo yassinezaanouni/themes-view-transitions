@@ -2,6 +2,7 @@ import "./globals.css";
 
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Link from "next/link";
 
 import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -37,18 +38,33 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="min-h-screen bg-background">
+          <div className="flex min-h-screen flex-col bg-background">
             <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
               <div className="container flex h-16 items-center justify-between">
-                <div className="flex items-center gap-2">
+                <Link href="/" className="flex items-center gap-2">
                   <h1 className="text-xl font-bold">View Transitions</h1>
-                </div>
+                </Link>
                 <ThemeToggle />
               </div>
             </header>
-            <main className="container py-8">
+            <main className="container flex-1 py-8">
               {children}
             </main>
+            <footer className="border-t border-border">
+              <div className="container flex h-16 items-center justify-center gap-1">
+                <p className="text-sm text-muted-foreground">
+                  Built with View Transitions API by
+                </p>
+                <a
+                  href="https://x.com/YassineZaanouni"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-sm text-foreground hover:underline"
+                >
+                  @yassinezaanouni
+                </a>
+              </div>
+            </footer>
           </div>
         </ThemeProvider>
       </body>
