@@ -53,7 +53,7 @@ export function TransitionDetail({
               {transition.title}
             </h1>
             <span className="bg-primary/10 text-primary rounded-md px-2 py-1 text-xs font-medium">
-              {transition.category}
+              Theme
             </span>
           </div>
           <Button asChild variant="outline">

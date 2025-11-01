@@ -3,7 +3,6 @@ export interface Transition {
   title: string;
   slug: string;
   description: string;
-  category: string;
   cssFile: string; // Path to CSS file relative to src/styles/transitions/
   componentFile: string; // Path to component file relative to src/components/
 }
@@ -14,7 +13,6 @@ export const transitions: Transition[] = [
     title: 'Circular Reveal Theme',
     slug: 'theme-toggle',
     description: 'Circular reveal animation for theme switching',
-    category: 'Theme',
     cssFile: 'theme-toggle.css',
     componentFile: 'theme-toggle.tsx',
   },
@@ -23,7 +21,6 @@ export const transitions: Transition[] = [
     title: 'Vertical Wipe Theme',
     slug: 'vertical-wipe',
     description: 'Vertical wipe animation for theme transitions',
-    category: 'Theme',
     cssFile: 'vertical-wipe.css',
     componentFile: 'theme-toggle.tsx',
   },
@@ -32,7 +29,6 @@ export const transitions: Transition[] = [
     title: 'Diagonal Slide Theme',
     slug: 'diagonal-slide',
     description: 'Diagonal sliding animation for theme changes',
-    category: 'Theme',
     cssFile: 'diagonal-slide.css',
     componentFile: 'theme-toggle.tsx',
   },

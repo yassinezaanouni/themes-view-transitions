@@ -54,61 +54,30 @@ export function TransitionCard({ transition, index }: TransitionCardProps) {
           <CardContent className="space-y-3">
             <div className="bg-muted/50 border-border relative h-32 overflow-hidden rounded-md border">
               <div className="absolute inset-0 flex items-center justify-center">
-                {transition.category === 'Theme' ? (
-                  <div
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                    }}
-                  >
-                    <ThemeToggle ref={themeToggleRef} />
-                  </div>
-                ) : (
-                  <div className="flex gap-2">
-                    <m.div
-                      className="from-chart-3 to-chart-4 h-12 w-12 rounded-lg bg-gradient-to-br"
-                      animate={{
-                        x: [-20, 20, -20],
-                        opacity: [0.5, 1, 0.5],
-                      }}
-                      transition={{
-                        duration: 2.5,
-                        repeat: Infinity,
-                        ease: 'easeInOut',
-                      }}
-                    />
-                    <m.div
-                      className="from-chart-5 to-chart-1 h-12 w-12 rounded-lg bg-gradient-to-br"
-                      animate={{
-                        x: [20, -20, 20],
-                        opacity: [1, 0.5, 1],
-                      }}
-                      transition={{
-                        duration: 2.5,
-                        repeat: Infinity,
-                        ease: 'easeInOut',
-                      }}
-                    />
-                  </div>
-                )}
+                <div
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                  }}
+                >
+                  <ThemeToggle ref={themeToggleRef} />
+                </div>
               </div>
               <div className="bg-background/80 border-border absolute right-2 bottom-2 rounded-md border px-2 py-1 backdrop-blur-sm">
                 <span className="text-muted-foreground text-xs font-medium">
-                  {transition.category}
+                  Theme
                 </span>
               </div>
             </div>
-            {transition.category === 'Theme' && (
-              <Button
-                type="button"
-                onClick={handlePlayClick}
-                variant="outline"
-                className="w-full gap-2"
-              >
-                <Play className="h-3 w-3" />
-                Play Transition
-              </Button>
-            )}
+            <Button
+              type="button"
+              onClick={handlePlayClick}
+              variant="outline"
+              className="w-full gap-2"
+            >
+              <Play className="h-3 w-3" />
+              Play Transition
+            </Button>
           </CardContent>
         </Card>
       </m.div>
