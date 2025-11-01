@@ -36,6 +36,8 @@ export default async function TransitionPage({ params }: TransitionPageProps) {
   const transitionClass = `${transition.slug}-transition`;
 
   componentCode = componentCode
+    // Remove PostHog import
+    .replace(/import \{ usePostHog \} from 'posthog-js\/react';\n/g, '')
     // Remove TransitionType import
     .replace(/import \{ TransitionType \} from '@\/data\/transitions';\n/g, '')
     // Remove ThemeToggleRef interface
@@ -51,6 +53,10 @@ export default async function TransitionPage({ params }: TransitionPageProps) {
     .replace(/\},\n\);\n\nThemeToggle\.displayName = 'ThemeToggle';/, '};')
     // Remove useImperativeHandle hook
     .replace(/\s*useImperativeHandle\([\s\S]*?\}\)\);?\s*/g, '')
+    // Remove PostHog hook declaration
+    .replace(/\s*const posthog = usePostHog\(\);?\s*/g, '')
+    // Remove PostHog tracking comment and capture call
+    .replace(/\s*\/\/ Track theme toggle event[\s\S]*?posthog\?\.capture\([^;]*\);?\s*/g, '\n')
     // Replace transitionType variable usage with hardcoded value
     .replace(/\btransitionType\b/g, `'${transition.slug}'`)
     // Replace the entire transition class mapping logic with hardcoded value
