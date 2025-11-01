@@ -28,7 +28,8 @@ export type TransitionType =
   | 'columns-slide'
   | 'spiral-wipe'
   | 'iris-reveal'
-  | 'skew-slide';
+  | 'skew-slide'
+  | 'the-premium-fade';
 
 export type CategoryType =
   | 'featured'
@@ -65,6 +66,18 @@ export const transitions: Transition[] = [
     tags: ['Professional', 'Clean', 'Modern'],
     featured: true,
     complexity: 'simple',
+  },
+  {
+    id: '32',
+    title: 'Columns Slide',
+    slug: 'columns-slide',
+    description: 'Staggered columns sliding down with wave effect',
+    cssFile: 'columns-slide.css',
+    componentFile: 'theme-toggle.tsx',
+    category: 'wipes',
+    tags: ['Creative', 'Structured', 'Dynamic'],
+    featured: true,
+    complexity: 'intermediate',
   },
   {
     id: '3',
@@ -123,7 +136,7 @@ export const transitions: Transition[] = [
     componentFile: 'theme-toggle.tsx',
     category: 'fun',
     tags: ['Playful', 'Fun', 'Unique'],
-    featured: true,
+    featured: false,
     complexity: 'simple',
   },
   {
@@ -171,7 +184,7 @@ export const transitions: Transition[] = [
     componentFile: 'theme-toggle.tsx',
     category: 'fun',
     tags: ['Playful', 'Romantic', 'Fun'],
-    featured: false,
+    featured: true,
     complexity: 'simple',
   },
   {
@@ -315,7 +328,7 @@ export const transitions: Transition[] = [
     componentFile: 'theme-toggle.tsx',
     category: 'organic',
     tags: ['Creative', 'Digital', 'Modern'],
-    featured: true,
+    featured: false,
     complexity: 'intermediate',
   },
   {
@@ -366,18 +379,7 @@ export const transitions: Transition[] = [
     featured: false,
     complexity: 'advanced',
   },
-  {
-    id: '32',
-    title: 'Columns Slide',
-    slug: 'columns-slide',
-    description: 'Staggered columns sliding down with wave effect',
-    cssFile: 'columns-slide.css',
-    componentFile: 'theme-toggle.tsx',
-    category: 'wipes',
-    tags: ['Creative', 'Structured', 'Dynamic'],
-    featured: true,
-    complexity: 'intermediate',
-  },
+
   {
     id: '33',
     title: 'Spiral Wipe',
@@ -412,6 +414,18 @@ export const transitions: Transition[] = [
     category: '3d',
     tags: ['Dynamic', 'Modern', 'Bold'],
     featured: false,
+    complexity: 'intermediate',
+  },
+  {
+    id: '36',
+    title: 'The Premium Fade',
+    slug: 'the-premium-fade',
+    description: 'Border sweep with grid pattern overlay and content fade',
+    cssFile: 'the-premium-fade.css',
+    componentFile: 'theme-toggle.tsx',
+    category: 'wipes',
+    tags: ['Professional', 'Structured', 'Smooth'],
+    featured: true,
     complexity: 'intermediate',
   },
 ];

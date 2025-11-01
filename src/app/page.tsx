@@ -1,13 +1,14 @@
+import {
+  Box,
+  Droplets,
+  Move,
+  PartyPopper,
+  Shapes,
+  Sparkles,
+} from 'lucide-react';
+
 import { CategorySection } from '@/components/category-section';
 import { CategoryType, transitions } from '@/data/transitions';
-import {
-  Shapes,
-  Droplets,
-  Sparkles,
-  Move,
-  Box,
-  PartyPopper,
-} from 'lucide-react';
 
 export default function Home() {
   // Group transitions by category
@@ -19,7 +20,7 @@ export default function Home() {
       acc[transition.category].push(transition);
       return acc;
     },
-    {} as Record<CategoryType, typeof transitions>
+    {} as Record<CategoryType, typeof transitions>,
   );
 
   // Get featured transitions
@@ -78,11 +79,11 @@ export default function Home() {
   return (
     <div className="space-y-20">
       {/* Header */}
-      <header className="space-y-4 pb-8 border-b">
+      <header className="space-y-4 border-b pb-8">
         <h1 className="text-5xl font-bold tracking-tight md:text-6xl">
           Transition Gallery
         </h1>
-        <p className="text-muted-foreground text-lg md:text-xl max-w-2xl">
+        <p className="text-muted-foreground max-w-2xl text-lg md:text-xl">
           Explore {transitions.length} beautiful theme transitions powered by
           the View Transition API
         </p>
