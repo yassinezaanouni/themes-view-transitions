@@ -1,5 +1,5 @@
-import { notFound } from 'next/navigation';
 import { readFile } from 'fs/promises';
+import { notFound } from 'next/navigation';
 import { join } from 'path';
 
 import { TransitionDetail } from '@/components/transition-detail';
