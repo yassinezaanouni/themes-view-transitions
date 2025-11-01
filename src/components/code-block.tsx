@@ -1,8 +1,8 @@
 'use client';
 
 import { useTheme } from 'next-themes';
-import { startTransition, useEffect, useState } from 'react';
 import { usePostHog } from 'posthog-js/react';
+import { startTransition, useEffect, useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import {
   oneDark,
