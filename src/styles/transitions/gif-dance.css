@@ -1,0 +1,32 @@
+/* GIF Dance Theme Transition */
+
+html.gif-dance-transition::view-transition-group(root) {
+  animation-timing-function: var(--expo-in);
+}
+
+html.gif-dance-transition::view-transition-new(root) {
+  mask: url('https://media.tenor.com/cyORI7kwShQAAAAi/shigure-ui-dance.gif') center / 0 no-repeat;
+  animation: gif-scale 3s;
+  animation-fill-mode: both;
+}
+
+html.gif-dance-transition::view-transition-old(root),
+html.gif-dance-transition.dark::view-transition-old(root) {
+  animation: gif-scale 3s;
+  animation-fill-mode: both;
+}
+
+@keyframes gif-scale {
+  0% {
+    mask-size: 0;
+  }
+  10% {
+    mask-size: 50vmax;
+  }
+  90% {
+    mask-size: 50vmax;
+  }
+  100% {
+    mask-size: 2000vmax;
+  }
+}

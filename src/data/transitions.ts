@@ -1,4 +1,13 @@
-export type TransitionType = 'theme-toggle' | 'vertical-wipe' | 'diagonal-slide';
+export type TransitionType =
+  | 'theme-toggle'
+  | 'vertical-wipe'
+  | 'diagonal-slide'
+  | 'circle'
+  | 'circle-with-blur'
+  | 'circle-blur-top-left'
+  | 'polygon'
+  | 'gif-dance'
+  | 'gif-love';
 
 export interface Transition {
   id: string;
@@ -32,6 +41,54 @@ export const transitions: Transition[] = [
     slug: 'diagonal-slide',
     description: 'Diagonal sliding animation for theme changes',
     cssFile: 'diagonal-slide.css',
+    componentFile: 'theme-toggle.tsx',
+  },
+  {
+    id: '6',
+    title: 'Circle Theme',
+    slug: 'circle',
+    description: 'Circular mask animation from center',
+    cssFile: 'circle.css',
+    componentFile: 'theme-toggle.tsx',
+  },
+  {
+    id: '7',
+    title: 'Circle with Blur Theme',
+    slug: 'circle-with-blur',
+    description: 'Circular mask with blur effect',
+    cssFile: 'circle-with-blur.css',
+    componentFile: 'theme-toggle.tsx',
+  },
+  {
+    id: '8',
+    title: 'Circle Blur Top Left',
+    slug: 'circle-blur-top-left',
+    description: 'Circular blur expanding from top left corner',
+    cssFile: 'circle-blur-top-left.css',
+    componentFile: 'theme-toggle.tsx',
+  },
+  {
+    id: '9',
+    title: 'Polygon Theme',
+    slug: 'polygon',
+    description: 'Geometric polygon reveal animation',
+    cssFile: 'polygon.css',
+    componentFile: 'theme-toggle.tsx',
+  },
+  {
+    id: '10',
+    title: 'Dance GIF Theme',
+    slug: 'gif-dance',
+    description: 'Fun dancing character transition effect',
+    cssFile: 'gif-dance.css',
+    componentFile: 'theme-toggle.tsx',
+  },
+  {
+    id: '11',
+    title: 'Love GIF Theme',
+    slug: 'gif-love',
+    description: 'Love-themed animated transition',
+    cssFile: 'gif-love.css',
     componentFile: 'theme-toggle.tsx',
   },
 ];

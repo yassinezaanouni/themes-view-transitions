@@ -2,3 +2,9 @@
 @import './transitions/theme-toggle.css';
 @import './transitions/vertical-wipe.css';
 @import './transitions/diagonal-slide.css';
+@import './transitions/circle.css';
+@import './transitions/circle-with-blur.css';
+@import './transitions/circle-blur-top-left.css';
+@import './transitions/polygon.css';
+@import './transitions/gif-dance.css';
+@import './transitions/gif-love.css';

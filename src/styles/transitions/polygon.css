@@ -1,0 +1,41 @@
+/* Polygon Theme Transition */
+
+html.polygon-transition::view-transition-group(root) {
+  animation-duration: 0.7s;
+  animation-timing-function: var(--expo-out);
+}
+
+html.polygon-transition::view-transition-new(root) {
+  animation-name: polygon-reveal-light;
+  animation-fill-mode: both;
+}
+
+html.polygon-transition::view-transition-old(root),
+html.polygon-transition.dark::view-transition-old(root) {
+  animation: none;
+  animation-fill-mode: both;
+  z-index: -1;
+}
+
+html.polygon-transition.dark::view-transition-new(root) {
+  animation-name: polygon-reveal-dark;
+  animation-fill-mode: both;
+}
+
+@keyframes polygon-reveal-dark {
+  from {
+    clip-path: polygon(50% -71%, -50% 71%, -50% 71%, 50% -71%);
+  }
+  to {
+    clip-path: polygon(50% -71%, -50% 71%, 50% 171%, 171% 50%);
+  }
+}
+
+@keyframes polygon-reveal-light {
+  from {
+    clip-path: polygon(171% 50%, 50% 171%, 50% 171%, 171% 50%);
+  }
+  to {
+    clip-path: polygon(171% 50%, 50% 171%, -50% 71%, 50% -71%);
+  }
+}

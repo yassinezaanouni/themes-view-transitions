@@ -1,0 +1,32 @@
+/* GIF Love Theme Transition */
+
+html.gif-love-transition::view-transition-group(root) {
+  animation-timing-function: var(--expo-in);
+}
+
+html.gif-love-transition::view-transition-new(root) {
+  mask: url('https://media.tenor.com/Jz0aSpk9VIQAAAAi/i-love-you-love.gif') center / 0 no-repeat;
+  animation: gif-love-scale 2s;
+  animation-fill-mode: both;
+}
+
+html.gif-love-transition::view-transition-old(root),
+html.gif-love-transition.dark::view-transition-old(root) {
+  animation: gif-love-scale 2s;
+  animation-fill-mode: both;
+}
+
+@keyframes gif-love-scale {
+  0% {
+    mask-size: 0;
+  }
+  10% {
+    mask-size: 50vmax;
+  }
+  90% {
+    mask-size: 50vmax;
+  }
+  100% {
+    mask-size: 2000vmax;
+  }
+}

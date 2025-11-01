@@ -73,7 +73,7 @@ export const ThemeToggle = forwardRef<ThemeToggleRef, ThemeToggleProps>(
       },
     };
 
-    const toggleTheme = () => {
+    const toggleTheme = async () => {
       const newTheme = theme === 'dark' ? 'light' : 'dark';
       const prefersReducedMotion = window.matchMedia(
         '(prefers-reduced-motion: reduce)',
@@ -107,12 +107,15 @@ export const ThemeToggle = forwardRef<ThemeToggleRef, ThemeToggleProps>(
 
       document.documentElement.classList.add(transitionClass);
 
-      document.startViewTransition(() => {
+      const transition = document.startViewTransition(() => {
         setTheme(newTheme);
-        setTimeout(() => {
-          document.documentElement.classList.remove(transitionClass);
-        }, 600);
       });
+
+      try {
+        await transition.finished;
+      } finally {
+        document.documentElement.classList.remove(transitionClass);
+      }
     };
 
     const sunPath =

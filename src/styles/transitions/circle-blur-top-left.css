@@ -1,0 +1,27 @@
+/* Circle Blur Top Left Theme Transition */
+
+html.circle-blur-top-left-transition::view-transition-group(root) {
+  animation-timing-function: var(--expo-out);
+}
+
+html.circle-blur-top-left-transition::view-transition-new(root) {
+  mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><defs><filter id="blur"><feGaussianBlur stdDeviation="2"/></filter></defs><circle cx="0" cy="0" r="18" fill="white" filter="url(%23blur)"/></svg>') top left / 0 no-repeat;
+  mask-origin: content-box;
+  animation: circle-blur-tl-scale 1s;
+  animation-fill-mode: both;
+  transform-origin: top left;
+}
+
+html.circle-blur-top-left-transition::view-transition-old(root),
+html.circle-blur-top-left-transition.dark::view-transition-old(root) {
+  animation: circle-blur-tl-scale 1s;
+  animation-fill-mode: both;
+  transform-origin: top left;
+  z-index: -1;
+}
+
+@keyframes circle-blur-tl-scale {
+  to {
+    mask-size: 350vmax;
+  }
+}
