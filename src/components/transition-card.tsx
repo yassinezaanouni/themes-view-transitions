@@ -4,8 +4,8 @@ import { ArrowRight, Play, Star } from 'lucide-react';
 import Link from 'next/link';
 import { useRef } from 'react';
 
-import { Badge } from '@/components/ui/badge';
 import { ThemeToggle, ThemeToggleRef } from '@/components/theme-toggle';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -21,7 +21,7 @@ interface TransitionCardProps {
   index: number;
 }
 
-export function TransitionCard({ transition, index }: TransitionCardProps) {
+export function TransitionCard({ transition }: TransitionCardProps) {
   const themeToggleRef = useRef<ThemeToggleRef>(null);
 
   const handlePlayClick = (e: React.MouseEvent) => {
@@ -45,7 +45,7 @@ export function TransitionCard({ transition, index }: TransitionCardProps) {
                   {transition.featured && (
                     <Badge
                       variant="secondary"
-                      className="gap-1 bg-gradient-to-r from-amber-500/10 to-orange-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/30"
+                      className="gap-1 border border-amber-500/30 bg-linear-to-r from-amber-500/10 to-orange-500/10 text-amber-700 dark:text-amber-400"
                     >
                       <Star className="h-3 w-3 fill-current" />
                       Featured
