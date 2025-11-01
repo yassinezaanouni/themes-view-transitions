@@ -76,17 +76,17 @@ export default function Home() {
   ];
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-20">
       {/* Header */}
-      <div className="space-y-3 mb-12">
-        <h1 className="text-4xl font-bold tracking-tight md:text-5xl">
+      <header className="space-y-4 pb-8 border-b">
+        <h1 className="text-5xl font-bold tracking-tight md:text-6xl">
           Transition Gallery
         </h1>
-        <p className="text-muted-foreground text-lg">
+        <p className="text-muted-foreground text-lg md:text-xl max-w-2xl">
           Explore {transitions.length} beautiful theme transitions powered by
           the View Transition API
         </p>
-      </div>
+      </header>
 
       {/* Featured Section */}
       {featuredTransitions.length > 0 && (

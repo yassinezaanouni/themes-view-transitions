@@ -21,19 +21,23 @@ export function CategorySection({
   if (transitions.length === 0) return null;
 
   return (
-    <section id={`category-${category}`} className="mb-16 scroll-mt-8">
-      <div className="mb-6">
-        <div className="flex items-center gap-3 mb-2">
+    <section id={`category-${category}`} className="scroll-mt-8">
+      <header className="mb-8 space-y-3">
+        <div className="flex items-center gap-3">
           <div className={color}>{icon}</div>
-          <h2 className="text-3xl font-bold tracking-tight">{title}</h2>
-          <div className="bg-muted text-muted-foreground flex h-6 min-w-6 items-center justify-center rounded-full px-2 text-xs font-medium">
+          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
+            {title}
+          </h2>
+          <div className="bg-muted text-muted-foreground flex h-7 min-w-7 items-center justify-center rounded-full px-2.5 text-sm font-medium">
             {transitions.length}
           </div>
         </div>
         {description && (
-          <p className="text-muted-foreground ml-8 text-sm">{description}</p>
+          <p className="text-muted-foreground text-base md:text-lg ml-11 max-w-3xl">
+            {description}
+          </p>
         )}
-      </div>
+      </header>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {transitions.map((transition, index) => (
           <TransitionCard
