@@ -1,0 +1,43 @@
+/* Skew Slide Theme Transition */
+
+html.skew-slide-transition::view-transition-group(root) {
+  animation-timing-function: var(--expo-out);
+}
+
+html.skew-slide-transition::view-transition-old(root) {
+  animation: skew-exit 0.8s var(--expo-out) forwards;
+  z-index: 1;
+}
+
+html.skew-slide-transition::view-transition-new(root) {
+  animation: skew-enter 0.8s var(--expo-out) forwards;
+  z-index: 2;
+}
+
+@keyframes skew-enter {
+  0% {
+    transform: translateX(100%) skewX(-15deg);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0%) skewX(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes skew-exit {
+  0% {
+    transform: translateX(0%) skewX(0deg);
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(-30%) skewX(8deg);
+    opacity: 0;
+  }
+}

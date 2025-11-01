@@ -19,7 +19,10 @@ export type TransitionType =
   | 'perspective-travel'
   | 'diagonal-wipe'
   | 'flip-3d'
-  | 'columns-slide';
+  | 'columns-slide'
+  | 'spiral-wipe'
+  | 'iris-reveal'
+  | 'skew-slide';
 
 export interface Transition {
   id: string;
@@ -197,6 +200,30 @@ export const transitions: Transition[] = [
     slug: 'columns-slide',
     description: 'Staggered columns sliding down with wave effect',
     cssFile: 'columns-slide.css',
+    componentFile: 'theme-toggle.tsx',
+  },
+  {
+    id: '33',
+    title: 'Spiral Wipe',
+    slug: 'spiral-wipe',
+    description: 'Rotating spiral expanding from center outward',
+    cssFile: 'spiral-wipe.css',
+    componentFile: 'theme-toggle.tsx',
+  },
+  {
+    id: '34',
+    title: 'Iris Reveal',
+    slug: 'iris-reveal',
+    description: 'Camera iris diaphragm opening from center',
+    cssFile: 'iris-reveal.css',
+    componentFile: 'theme-toggle.tsx',
+  },
+  {
+    id: '35',
+    title: 'Skew Slide',
+    slug: 'skew-slide',
+    description: 'Dynamic skewed sliding transition',
+    cssFile: 'skew-slide.css',
     componentFile: 'theme-toggle.tsx',
   },
 ];

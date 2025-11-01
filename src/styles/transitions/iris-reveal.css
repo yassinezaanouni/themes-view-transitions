@@ -1,0 +1,95 @@
+/* Iris Reveal Theme Transition - Curtain Opening */
+
+html.iris-reveal-transition::view-transition-group(root) {
+  animation-timing-function: var(--expo-out);
+}
+
+html.iris-reveal-transition::view-transition-old(root) {
+  animation: none;
+  z-index: -1;
+}
+
+html.iris-reveal-transition::view-transition-new(root) {
+  animation: curtain-open 0.6s var(--expo-out) forwards;
+}
+
+@keyframes curtain-open {
+  0% {
+    clip-path: polygon(50% 0%, 50% 0%, 50% 100%, 50% 100%);
+  }
+  15% {
+    clip-path: polygon(40% 0%, 60% 0%, 60% 100%, 40% 100%);
+  }
+  30% {
+    clip-path: polygon(
+      30% 0%,
+      70% 0%,
+      72% 5%,
+      72% 95%,
+      70% 100%,
+      30% 100%,
+      28% 95%,
+      28% 5%
+    );
+  }
+  45% {
+    clip-path: polygon(
+      20% 0%,
+      80% 0%,
+      84% 8%,
+      84% 92%,
+      80% 100%,
+      20% 100%,
+      16% 92%,
+      16% 8%
+    );
+  }
+  60% {
+    clip-path: polygon(
+      10% 0%,
+      90% 0%,
+      95% 10%,
+      96% 90%,
+      90% 100%,
+      10% 100%,
+      5% 90%,
+      4% 10%
+    );
+  }
+  75% {
+    clip-path: polygon(
+      2% 0%,
+      98% 0%,
+      102% 12%,
+      104% 88%,
+      98% 100%,
+      2% 100%,
+      -2% 88%,
+      -4% 12%
+    );
+  }
+  90% {
+    clip-path: polygon(
+      -5% 0%,
+      105% 0%,
+      108% 8%,
+      110% 92%,
+      105% 100%,
+      -5% 100%,
+      -8% 92%,
+      -10% 8%
+    );
+  }
+  100% {
+    clip-path: polygon(
+      -10% 0%,
+      110% 0%,
+      110% 0%,
+      110% 100%,
+      110% 100%,
+      -10% 100%,
+      -10% 100%,
+      -10% 0%
+    );
+  }
+}
