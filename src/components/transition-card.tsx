@@ -62,7 +62,7 @@ export function TransitionCard({ transition, index }: TransitionCardProps) {
                 >
                   <ThemeToggle
                     ref={themeToggleRef}
-                    transitionType={transition.slug as 'theme-toggle' | 'vertical-wipe' | 'diagonal-slide'}
+                    transitionType={transition.slug}
                   />
                 </div>
               </div>

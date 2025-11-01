@@ -86,7 +86,7 @@ export function TransitionDetail({
               <div className="flex items-center justify-center">
                 <ThemeToggle
                   ref={themeToggleRef}
-                  transitionType={transition.slug as 'theme-toggle' | 'vertical-wipe' | 'diagonal-slide'}
+                  transitionType={transition.slug}
                 />
               </div>
 

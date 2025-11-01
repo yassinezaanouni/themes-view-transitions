@@ -5,13 +5,14 @@ import { useTheme } from 'next-themes';
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 
 import { Button } from '@/components/ui/button';
+import { TransitionType } from '@/data/transitions';
 
 export interface ThemeToggleRef {
   triggerTransition: () => void;
 }
 
 interface ThemeToggleProps {
-  transitionType?: 'theme-toggle' | 'vertical-wipe' | 'diagonal-slide';
+  transitionType?: TransitionType;
 }
 
 export const ThemeToggle = forwardRef<ThemeToggleRef, ThemeToggleProps>(({ transitionType = 'theme-toggle' }, ref) => {

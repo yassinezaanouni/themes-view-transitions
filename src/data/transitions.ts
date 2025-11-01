@@ -1,7 +1,9 @@
+export type TransitionType = 'theme-toggle' | 'vertical-wipe' | 'diagonal-slide';
+
 export interface Transition {
   id: string;
   title: string;
-  slug: string;
+  slug: TransitionType;
   description: string;
   cssFile: string; // Path to CSS file relative to src/styles/transitions/
   componentFile: string; // Path to component file relative to src/components/
