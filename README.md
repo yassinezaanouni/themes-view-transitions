@@ -4,7 +4,7 @@ A beautiful, modern showcase of theme transitions using the View Transition API.
 
 ## ✨ Features
 
-- **6 Unique Transitions**: Explore different transition effects including circular reveal, fade & slide, vertical wipe, scale & fade, diagonal slide, and rotate & zoom
+- **31 Unique Transitions**: Explore different transition effects including circular reveal, fade & slide, vertical wipe, scale & fade, diagonal slide, and rotate & zoom...
 - **Live Demos**: Interactive demos for each transition with replay functionality
 - **Code Viewer**: Syntax-highlighted code blocks with copy functionality
 - **Responsive Design**: Beautiful on all screen sizes
